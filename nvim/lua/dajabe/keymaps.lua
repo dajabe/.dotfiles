@@ -5,7 +5,7 @@
 -- vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Set shortcut to launch Oil a netrw replacement
-vim.keymap.set('n', '<leader>oo', '<CMD>Oil<CR>', { desc = 'Open oil file browser' })
+vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open oil file browser' })
 vim.keymap.set('n', '<leader>of', '<CMD>Oil --float<CR>', { desc = 'Open oil file browser' })
 vim.keymap.set('n', '<leader>ov', '<CMD>vertical Oil<CR>', { desc = 'Open oil file browser in a vertical pane' })
 vim.keymap.set('n', '<leader>oh', '<CMD>belowright Oil<CR>', { desc = 'Open oil file browser in a horizontal pane' })

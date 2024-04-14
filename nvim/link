@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+NVIM_CONF="$HOME/.config/nvim"
+rm -rf "$NVIM_CONF"
+ln -s "$(pwd)" "$NVIM_CONF"
