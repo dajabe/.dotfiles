@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+HYPR_CONF="$HOME/.config/hypr"
+rm -rf "$HYPR_CONF"
+ln -s "$(pwd)" "$HYPR_CONF"

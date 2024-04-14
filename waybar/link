@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+WAYBAR_CONF="$HOME/.config/waybar"
+rm -rf "$WAYBAR_CONF"
+ln -s "$(pwd)" "$WAYBAR_CONF"
