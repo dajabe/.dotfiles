@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+FISH_CONF="$HOME/.config/fish"
+rm -rf "$FISH_CONF"
+ln -s "$(pwd)" "$FISH_CONF"
