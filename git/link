@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+GIT_CONF="$HOME/.gitconfig"
+rm -rf "$GIT_CONF"
+ln -s ./gitconfig "$GIT_CONF"
