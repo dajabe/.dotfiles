@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+ELECTRON_VERSION="29"
+ELECTRON_FLAGS_CONF="$HOME/.config/electron$ELECTRON_VERSION-flags.conf"
+rm -rf "$ELECTRON_FLAGS_CONF"
+ln -s "$(pwd)/electron-flags.conf" "$ELECTRON_FLAGS_CONF"
