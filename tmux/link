@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+TMUX_CONF="$HOME/.config/tmux"
+rm -rf "$TMUX_CONF"
+ln -s "$(pwd)" "$TMUX_CONF"

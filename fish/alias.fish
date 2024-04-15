@@ -27,6 +27,20 @@ alias ee='espanso edit'
 # gh
 abbr -a ghpr  gh pr create --fill
 
+# Ruby
+abbr -a rc    bundle exec rubocop
+abbr -a rdbm   rake db:migrate
+abbr -a rdbr   rake db:rollback
+
+# Bundler
+abbr -a bu    bundle update
+
+# Shortcut
+abbr -a scbr short story --git-branch-short
+
+# npm
+abbr -a nrd npm run dev
+
 # git
 alias git=hub
 alias gcd='cd $(git rev-parse --show-toplevel)'
