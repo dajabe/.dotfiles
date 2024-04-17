@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+starship_conf="$HOME/.config/starship"
+rm -rf "$starship_conf"
+ln -s "$(pwd)" "$starship_conf"

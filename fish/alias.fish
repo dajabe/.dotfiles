@@ -3,10 +3,6 @@ abbr -a tns     tmux new-session -s
 abbr -a tks     tmux kill-session
 abbr -a tls     tmux list-session
 
-# Specifically configured tmux instances
-# config/dotfile editing
-alias tec="tmux new-session -As config -n 'home/config' -c $HOME/.config 'nvim .'\; new-window -Sc $HOME/dev/.dotfiles -n 'dotfiles' 'nvim .'\; new-window -Sc $HOME/dev/.ds-dots -n 'ds-dots' 'nvim .'\; new-window -Sc $HOME/dev/.dotfiles -n 'dotfiles-shell'\; select-window -t 'dotfiles'"
-
 # Fish
 alias reload='source $HOME/.config/fish/config.fish'
 alias refish='exec fish'
