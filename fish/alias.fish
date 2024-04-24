@@ -2,6 +2,7 @@
 abbr -a tns     tmux new-session -s 
 abbr -a tks     tmux kill-session
 abbr -a tls     tmux list-session
+abbr -a ta      tmux attach
 
 # Fish
 alias reload='source $HOME/.config/fish/config.fish'
