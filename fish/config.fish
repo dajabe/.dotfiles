@@ -17,8 +17,11 @@ fish_add_path ~/.local/share/mise/shims
 fish_add_path -m --path $HOME/bin
 
 # Import one password plugins
-source /home/djb/.config/op/plugins.sh
+if test -e "$HOME/.config/op/plugins.sh"
+  source /home/djb/.config/op/plugins.sh
+end
 
+zoxide init fish | source
+fzf --fish | source
 mise activate fish | source
 starship init fish | source  
-zoxide init fish | source
