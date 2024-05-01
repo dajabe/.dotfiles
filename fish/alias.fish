@@ -19,7 +19,7 @@ alias lt='ls --tree'
 alias ll='ls -Alh'
 
 # replace cd with zoxide
-alias cd=z
+# alias cd=z
 
 # Espanso
 alias ee='espanso edit'
