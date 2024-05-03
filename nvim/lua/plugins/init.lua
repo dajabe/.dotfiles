@@ -1,5 +1,6 @@
 return {
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-haml',
 
   { 'numToStr/Comment.nvim', opts = {} }, -- "gc" to comment visual regions/lines
 

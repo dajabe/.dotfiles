@@ -4,6 +4,10 @@ abbr -a tks     tmux kill-session
 abbr -a tls     tmux list-session
 abbr -a ta      tmux attach
 
+# Weather
+alias wthr='curl wttr.in/palmerston+north'
+abbr -a wttr    curl wttr.in/
+
 # Fish
 alias reload='source $HOME/.config/fish/config.fish'
 alias refish='exec fish'
@@ -19,6 +23,7 @@ alias lt='ls --tree'
 alias ll='ls -Alh'
 
 # replace cd with zoxide
+# this is currently causing a recursive loop with fish
 # alias cd=z
 
 # Espanso
