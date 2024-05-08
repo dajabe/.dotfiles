@@ -1,5 +1,6 @@
-return { -- Autoformat
+return {
   'stevearc/conform.nvim',
+  event = { 'BufReadPre', 'BufNewFile' },
   opts = {
     notify_on_error = false,
     format_on_save = {
@@ -10,7 +11,7 @@ return { -- Autoformat
       lua = { 'stylua' },
       bash = { 'shfmt' },
       sh = { 'shfmt' },
-      -- ruby = { 'rubocop' },
+      ruby = { 'rubocop' },
       javascript = { 'prettier' },
       -- Conform can also run multiple formatters sequentially
       --
