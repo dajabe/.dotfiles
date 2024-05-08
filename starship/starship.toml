@@ -81,7 +81,9 @@ $status\
 $os\
 $container\
 $shell\
-$character"""
+$custom.convox\
+$character
+stuff"""
 
 command_timeout = 1000
 
@@ -224,10 +226,3 @@ symbol = " "
 
 [spack]
 symbol = "🅢 "
-
-[custom.arch]
-when = "true"
-command = 'arch'
-description = "Show the system architecture"
-format = "[$output]($style) "
-

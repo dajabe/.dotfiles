@@ -10,7 +10,7 @@ return { -- Autoformat
       lua = { 'stylua' },
       bash = { 'shfmt' },
       sh = { 'shfmt' },
-      ruby = { 'rubocop' },
+      -- ruby = { 'rubocop' },
       javascript = { 'prettier' },
       -- Conform can also run multiple formatters sequentially
       --

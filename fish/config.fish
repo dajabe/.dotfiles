@@ -13,7 +13,7 @@ end
 
 # Pathing
 fish_add_path -m --path ~/.local/bin
-fish_add_path ~/.local/share/mise/shims
+# fish_add_path ~/.local/share/mise/shims
 fish_add_path -m --path $HOME/bin
 
 # Import one password plugins

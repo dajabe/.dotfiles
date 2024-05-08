@@ -1,11 +1,17 @@
 return { -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
+  'yioneko/nvim-yati',
   build = ':TSUpdate',
   config = function()
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 
     ---@diagnostic disable-next-line: missing-fields
     require('nvim-treesitter.configs').setup {
+      yati = {
+        enable = true,
+        default_lazy = true,
+        default_fallback = 'auto',
+      },
       ensure_installed = {
         'bash',
         'c',
@@ -19,7 +25,7 @@ return { -- Highlight, edit, and navigate code
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = { enable = true },
-      indent = { enable = true },
+      indent = { enable = false },
     }
 
     -- There are additional nvim-treesitter modules that you can use to interact
