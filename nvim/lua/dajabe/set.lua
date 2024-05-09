@@ -3,6 +3,9 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 -- See `:help vim.opt` or `:help option-list`
 
+-- add mise shims to path
+vim.env.PATH = vim.env.HOME .. '/.local/share/mise/shims/:' .. vim.env.PATH
+
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 -- Line numbers show both

@@ -7,11 +7,16 @@ return {
       timeout_ms = 500,
       lsp_fallback = true,
     },
+    formatters = {
+      rubocop = {
+        prepend_args = { '--autocorrect-all' },
+      },
+    },
     formatters_by_ft = {
       lua = { 'stylua' },
       bash = { 'shfmt' },
       sh = { 'shfmt' },
-      ruby = { 'rubocop' },
+      -- ruby = { { 'rubocop' } },
       javascript = { 'prettier' },
       -- Conform can also run multiple formatters sequentially
       --

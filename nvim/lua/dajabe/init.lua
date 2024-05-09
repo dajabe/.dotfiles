@@ -1,7 +1,7 @@
 require 'dajabe.set'
 require 'dajabe.keymaps'
 
-vim.lsp.set_log_level 'debug'
+-- vim.lsp.set_log_level 'debug'
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 

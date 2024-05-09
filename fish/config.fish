@@ -8,7 +8,9 @@ end
 set fish_greeting
 
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+  mise activate fish | source
+else
+  mise activate fish --shims | source
 end
 
 # Pathing
@@ -23,5 +25,5 @@ end
 
 zoxide init fish | source
 fzf --fish | source
-mise activate fish | source
+# mise activate fish | source
 starship init fish | source  
