@@ -9,6 +9,11 @@ return {
       max_width = 100,
       max_height = 100,
     },
+    git = {
+      mv = function(d, s)
+        return true
+      end,
+    },
   },
   dependencies = { 'nvim-tree/nvim-web-devicons' },
 }
