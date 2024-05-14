@@ -56,7 +56,11 @@ abbr -a rdbm   rake db:migrate
 abbr -a rdbr   rake db:rollback
 
 # Bundler
-abbr -a bu    bundle update
+alias b=bundle
+abbr -a bu    b update
+
+# Rails
+alias r=rails
 
 # Shortcut
 abbr -a scbr short story --git-branch-short
