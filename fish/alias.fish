@@ -15,6 +15,9 @@ alias refish='exec fish'
 # Vim
 alias vi=nvim
 
+# Scratchy
+alias scr=scratchy
+
 # ls
 alias ls=lsd
 alias l='ls -l'
@@ -63,7 +66,7 @@ abbr -a bu    b update
 alias r=rails
 
 # Shortcut
-abbr -a scbr short story --git-branch-short
+alias ss='short story --git-branch-short'
 
 # npm
 abbr -a nrd npm run dev

@@ -3,7 +3,7 @@ source ~/.config/fish/alias.fish
 # Set a path to a secodary config file that is specific to a machine
 set -l custom_fish "$HOME/.config/env.fish"
 if test -e $custom_fish
-  echo "Found custom environment config loading $custom_fish"
+  # echo "Found custom environment config loading $custom_fish"
   source $custom_fish
 end
 
