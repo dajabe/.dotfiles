@@ -3,6 +3,7 @@ return {
   'tpope/vim-sleuth',
   'tpope/vim-haml',
   'nvim-lua/plenary.nvim',
+  'nvim-tree/nvim-web-devicons',
 
   { 'numToStr/Comment.nvim', opts = {} }, -- "gc" to comment visual regions/lines
 }
