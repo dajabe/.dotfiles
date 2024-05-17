@@ -101,7 +101,7 @@ return { -- LSP Configuration & Plugins
       vscode = true,
       settings = {
         rubocop = {
-          command = 'bundle exec rubocop',
+          command = 'bundle exec rubocop -A',
           use_bundler = true,
           auto_correct = true,
           auto_correct_all = true,
