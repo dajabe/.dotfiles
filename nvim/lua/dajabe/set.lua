@@ -23,6 +23,10 @@ vim.opt.showmode = false
 -- Sync clipboard between OS and Neovim. See `:help 'clipboard'`
 vim.opt.clipboard = 'unnamedplus'
 
+-- Folding
+vim.opt.foldmethod = 'indent'
+vim.opt.foldlevel = 999
+
 -- Enable break indent
 vim.opt.breakindent = true
 
