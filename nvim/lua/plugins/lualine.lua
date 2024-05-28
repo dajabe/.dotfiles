@@ -42,50 +42,37 @@ local function show_mode()
   return mode_map[mode] or mode
 end
 
-local git_blame = require 'gitblame'
--- I might want to return to truncating blame messages but for now we'll leave it out
-local function truncate_message(message, max_length)
-  if #message > max_length then
-    return string.sub(message, 1, max_length) .. '...'
-  else
-    return message
-  end
-end
-
-local function show_blame()
-  local blame_info = git_blame.get_current_blame_text()
-  return truncate_message(blame_info, 100)
-end
-
-local function format_branch_name(branch_name)
-  if branch_name:match '.-/sc-%d+/' then
-    return branch_name:match '([^/]+/sc-%d+)'
-  elseif branch_name:match '.-/' then
-    return branch_name:match '.-/([^/]+)$'
-  else
-    return branch_name
-  end
-end
-
-local function show_branch()
-  local branch
-  if vim.fn.exists ':Gbranch' == 2 then
-    branch = vim.fn['fugitive#head']()
-  else
-    branch = vim.fn.system('git branch --show-current'):gsub('%s+', '')
-  end
-  return truncate_message(format_branch_name(branch), 20)
-end
-
 return {
   'nvim-lualine/lualine.nvim',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
+    local custom_fname = require('lualine.components.filename'):extend()
+    local highlight = require 'lualine.highlight'
+    local default_status_colors = { saved = '#122c08', modified = '#8b7300' }
+
+    function custom_fname:init(options)
+      custom_fname.super.init(self, options)
+      self.options.path = 1
+      self.status_colors = {
+        saved = highlight.create_component_highlight_group({ bg = default_status_colors.saved }, 'filename_status_saved', self.options),
+        modified = highlight.create_component_highlight_group({ bg = default_status_colors.modified }, 'filename_status_modified', self.options),
+      }
+      if self.options.color == nil then
+        self.options.color = ''
+      end
+    end
+
+    function custom_fname:update_status()
+      local data = custom_fname.super.update_status(self)
+      data = highlight.component_format_highlight(vim.bo.modified and self.status_colors.modified or self.status_colors.saved) .. data
+      return data
+    end
+
     require('lualine').setup {
       options = {
         icons_enabled = true,
         theme = 'nightfly',
-        component_separators = { left = '  ~', right = '' },
+        component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
         disabled_filetypes = {
           statusline = {},
@@ -102,9 +89,9 @@ return {
       },
       sections = {
         lualine_a = { show_mode },
-        lualine_b = { { show_branch, icon = '' }, 'diff', { 'diagnostics', padding = 1 } },
+        lualine_b = { 'branch', 'diff', { 'diagnostics', padding = 1 } },
         -- lualine_b = { 'branch', 'diff', { 'diagnostics', padding = 1 } },
-        lualine_c = { { 'filename', path = 1 }, { show_blame, cond = git_blame.is_blame_text_available } },
+        lualine_c = { { custom_fname } },
         lualine_x = { 'encoding', 'fileformat', 'filetype' },
         lualine_y = { 'progress' },
         lualine_z = { 'location' },
