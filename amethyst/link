@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+AMETHYST_CONF="$HOME/.config/amethyst"
+SCRIPT_DIR=$(dirname "$(realpath "${BASH_SOURCE[*]}")")
+if [ -d $AMETHYST_CONF ]; then
+  rm -rf "$AMETHYST_CONF"
+else
+  # mkdir -p $AMETHYST_CONF
+fi
+ln -s "$SCRIPT_DIR" "$AMETHYST_CONF"
