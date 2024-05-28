@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+HS_CONF="$HOME/.hammerspoon"
+SCRIPT_DIR=$(dirname "$(realpath "${BASH_SOURCE[*]}")")
+rm -rf "$HS_CONF"
+ln -s "$SCRIPT_DIR" "$HS_CONF"
