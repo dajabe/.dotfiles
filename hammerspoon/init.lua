@@ -17,7 +17,7 @@ end
 -- Hyper modifier - { "cmd", "alt", "ctrl", "shift" }
 -- Meh modifier - { "alt", "ctrl", "shift" }
 hotkey.bind({ 'cmd', 'alt', 'ctrl', 'shift' }, 'T', typeTextToClipboard)
-hotkey.bind({ 'cmd', 'alt', 'ctrl', 'shift' }, '=', hs.reload)
+hotkey.bind({ 'alt', 'ctrl', 'shift' }, '=', hs.reload)
 
 -- Show a message that Hammerspoon has loaded the configuration
 alert.show(' Hammerspoon config loaded! ', {
