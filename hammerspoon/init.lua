@@ -1,12 +1,22 @@
 -- map used functions to easier to reach variables
 local hotkey = require 'hs.hotkey'
 local dialog = require 'hs.dialog'
-local alert = require 'hs.alert'
 local clipboard = require 'hs.pasteboard'
 local geo = require 'hs.geometry'
 
-local function sleep(seconds)
-  hs.timer.usleep(seconds * 100000) -- Convert seconds to microseconds
+local function alert(message)
+  hs.alert.show(message, {
+    strokeWidth = 1,
+    fillColor = { hex = '#1b1d29', alpha = 0.85 },
+    radius = 10,
+    atScreenEdge = 0,
+    textSize = 14,
+    textFont = 'Monoid Nerd Font',
+  })
+end
+
+local function sleep(deciseconds)
+  hs.timer.usleep(deciseconds * 100000)
 end
 
 local function typeTextToClipboard()
@@ -14,7 +24,17 @@ local function typeTextToClipboard()
 
   if button == 'OK' then
     clipboard.setContents(inputText)
-    alert.show 'Text copied to clipboard!'
+    alert 'Text copied to clipboard!'
+  end
+end
+
+local function showWindowInfo()
+  local win = hs.window.frontmostWindow()
+  if win then
+    local frame = win:frame()
+    alert(string.format('%s\n%d x %d', win:title(), frame.w, frame.h))
+  else
+    alert 'No active window found.'
   end
 end
 
@@ -84,13 +104,7 @@ end
 hotkey.bind({ 'cmd', 'alt', 'ctrl', 'shift' }, 'T', typeTextToClipboard)
 hotkey.bind({ 'alt', 'ctrl', 'shift' }, '=', hs.reload)
 hotkey.bind({ 'alt', 'ctrl', 'shift' }, 'C', cascadeWindows)
+hotkey.bind({ 'cmd', 'alt', 'ctrl', 'shift' }, 'I', showWindowInfo)
 
 -- Show a message that Hammerspoon has loaded the configuration
-alert.show(' Hammerspoon config loaded! ', {
-  strokeWidth = 1,
-  fillColor = { hex = '#1b1d29', alpha = 0.85 },
-  radius = 10,
-  atScreenEdge = 0,
-  textSize = 14,
-  textFont = 'Monoid Nerd Font',
-})
+alert ' Hammerspoon config loaded! '
