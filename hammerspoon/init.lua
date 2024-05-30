@@ -32,7 +32,12 @@ local function showWindowInfo()
   local win = hs.window.frontmostWindow()
   if win then
     local frame = win:frame()
-    alert(string.format('%s\n%d x %d', win:title(), frame.w, frame.h))
+    local app = win:application()
+    local bundleID = app:bundleID()
+
+    local infoString = string.format('%s\n%s - %s\n%d x %d\n%s', win:title(), app:name(), app:path(), frame.w, frame.h, bundleID)
+    alert(infoString)
+    clipboard.setContents(bundleID)
   else
     alert 'No active window found.'
   end
