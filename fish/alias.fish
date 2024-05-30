@@ -37,9 +37,9 @@ alias ee='espanso edit'
 
 # Convox
 alias cv=convox
-abbr -a cvss "cv switch docspring-staging"
-abbr -a cvsp "cv switch production-v3"
-abbr -a cvseu "cv switch europe-v3"
+abbr -a csst "cv switch staging"
+abbr -a csus "cv switch us"
+abbr -a cseu "cv switch eu"
 
 abbr -a cvr "cv rack"
 abbr -a cve "cv exec"
