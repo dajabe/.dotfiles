@@ -97,11 +97,12 @@ return { -- LSP Configuration & Plugins
       },
     }
 
+    require('lspconfig').gopls.setup {}
+
     require('lspconfig').ruby_lsp.setup {
       vscode = true,
       settings = {
         rubocop = {
-          command = 'bundle exec rubocop -A',
           use_bundler = true,
           auto_correct = true,
           auto_correct_all = true,

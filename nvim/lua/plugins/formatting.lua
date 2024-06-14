@@ -1,30 +1,28 @@
+-- Set per language lsp fallback options, defaults to true
+local lsp_fallback = setmetatable({
+  ruby = 'always',
+}, {
+  __index = function()
+    return true
+  end,
+})
+
 return {
   'stevearc/conform.nvim',
-  event = { 'BufReadPre', 'BufNewFile' },
+  event = { 'BufWritePre' },
   opts = {
     notify_on_error = false,
-    format_on_save = {
-      timeout_ms = 500,
-      lsp_fallback = true,
-    },
-    formatters = {
-      rubocop = {
-        prepend_args = { '--autocorrect-all' },
-      },
-    },
     formatters_by_ft = {
       lua = { 'stylua' },
       bash = { 'shfmt' },
       sh = { 'shfmt' },
-      ruby = { 'rubocop' },
       javascript = { 'prettier' },
-      -- Conform can also run multiple formatters sequentially
-      --
-      -- python = { "isort", "black" },
-      --
-      -- You can use a sub-list to tell conform to run *until* a formatter
-      -- is found.
-      -- javascript = { { "prettierd", "prettier" } },
     },
+    format_on_save = function(buf)
+      return {
+        timeout_ms = 500,
+        lsp_fallback = lsp_fallback[vim.bo[buf].filetype],
+      }
+    end,
   },
 }
