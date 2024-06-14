@@ -53,7 +53,7 @@ local function cascadeWindows()
   local xOffsetOther, yOffsetOther = 80, 50
   -- Set window sizes
   local chromeWidth, chromeHeight = 2040, 1200
-  local otherWidth, otherHeight = 1200, 1000
+  local otherWidth, otherHeight = 1600, 1000
 
   -- Separate Chrome windows from other windows
   local chromeWindows, otherWindows = {}, {}
