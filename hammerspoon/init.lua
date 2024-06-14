@@ -20,12 +20,15 @@ local function sleep(deciseconds)
 end
 
 local function typeTextToClipboard()
+  local focusedApp = hs.application.frontmostApplication()
   local button, inputText = dialog.textPrompt('Copy Text to Clipboard', '', '', 'OK', 'Cancel')
 
   if button == 'OK' then
     clipboard.setContents(inputText)
     alert 'Text copied to clipboard!'
   end
+
+  focusedApp:activate()
 end
 
 local function showWindowInfo()
