@@ -46,6 +46,49 @@ local function showWindowInfo()
   end
 end
 
+function CreateStore()
+  local store = {
+    data = {},
+  }
+
+  function store:add(id, data)
+    self.data[id] = data
+  end
+
+  function store:clear(id)
+    self.data[id] = nil
+  end
+
+  function store:get(id)
+    return self.data[id]
+  end
+
+  return store
+end
+
+WindowFrames = CreateStore()
+
+local function maximizeWindow()
+  local win = hs.window.focusedWindow()
+  local winId = win:id()
+  local screenFrame = win:screen():frame()
+  local gutter = 10
+
+  if WindowFrames:get(winId) then
+    win:setFrame(WindowFrames:get(winId), 0)
+    WindowFrames:clear(winId)
+  else
+    WindowFrames:add(winId, win:frame())
+    local newFrame = {
+      x = screenFrame.x + gutter,
+      y = screenFrame.y,
+      w = screenFrame.w - gutter * 2,
+      h = screenFrame.h - gutter,
+    }
+    win:setFrame(newFrame, 0)
+  end
+end
+
 local function cascadeWindows()
   local screen = hs.screen.mainScreen()
   local screenFrame = screen:frame()
@@ -77,12 +120,14 @@ local function cascadeWindows()
 
   -- cascade chrome windows from top right to bottom left
   for i, win in ipairs(chromeWindows) do
+    local winId = win:id()
     if i == 1 then
       x = screenFrame.w - chromeWidth
       y = 20
     end
     if win:isStandard() then
-      win:setSize(geo.size(chromeWidth, chromeHeight))
+      win:setSize(geo.size(chromeWidth, chromeHeight), 0)
+      WindowFrames:clear(winId) -- Clear size from store
       win:setTopLeft(geo.point(x, y))
       y = y + yOffsetChrome
       x = x - xOffsetChrome
@@ -92,12 +137,14 @@ local function cascadeWindows()
 
   -- cascade all other windows in the reverse direction
   for i, win in ipairs(otherWindows) do
+    local winId = win:id()
     if i == 1 then
       x = 0
       y = screenFrame.h - otherHeight
     end
     if win:isStandard() then
       win:setSize(geo.size(otherWidth, otherHeight))
+      WindowFrames:clear(winId) -- Clear size from store
       win:setTopLeft(geo.point(x, y))
       y = y - yOffsetOther
       x = x + xOffsetOther
@@ -107,12 +154,13 @@ local function cascadeWindows()
 end
 
 -- Hotkey setup
--- Hyper modifier - { "cmd", "alt", "ctrl", "shift" }
--- Meh modifier - { "alt", "ctrl", "shift" }
-hotkey.bind({ 'cmd', 'alt', 'ctrl', 'shift' }, 'T', typeTextToClipboard)
-hotkey.bind({ 'alt', 'ctrl', 'shift' }, '=', hs.reload)
-hotkey.bind({ 'alt', 'ctrl', 'shift' }, 'C', cascadeWindows)
-hotkey.bind({ 'cmd', 'alt', 'ctrl', 'shift' }, 'I', showWindowInfo)
+HyperMod = { 'cmd', 'alt', 'ctrl', 'shift' }
+MehMod = { 'alt', 'ctrl', 'shift' }
+hotkey.bind(HyperMod, 'T', typeTextToClipboard)
+hotkey.bind(HyperMod, 'I', showWindowInfo)
+hotkey.bind(MehMod, '=', hs.reload)
+hotkey.bind(MehMod, 'C', cascadeWindows)
+hotkey.bind(MehMod, 'F', maximizeWindow)
 
 -- Show a message that Hammerspoon has loaded the configuration
-alert ' Hammerspoon config loaded! '
+alert ' Ready to hammer spoons '
