@@ -4,6 +4,27 @@ local dialog = require 'hs.dialog'
 local clipboard = require 'hs.pasteboard'
 local geo = require 'hs.geometry'
 
+-- Helpers
+local function CreateStore()
+  local store = {
+    data = {},
+  }
+
+  function store:add(id, data)
+    self.data[id] = data
+  end
+
+  function store:clear(id)
+    self.data[id] = nil
+  end
+
+  function store:get(id)
+    return self.data[id]
+  end
+
+  return store
+end
+
 local function alert(message)
   hs.alert.show(message, {
     strokeWidth = 1,
@@ -18,6 +39,9 @@ end
 local function sleep(deciseconds)
   hs.timer.usleep(deciseconds * 100000)
 end
+
+-- Actions
+local WindowFrames = CreateStore() -- Store for tracking window frame sizes
 
 local function typeTextToClipboard()
   local focusedApp = hs.application.frontmostApplication()
@@ -45,28 +69,6 @@ local function showWindowInfo()
     alert 'No active window found.'
   end
 end
-
-function CreateStore()
-  local store = {
-    data = {},
-  }
-
-  function store:add(id, data)
-    self.data[id] = data
-  end
-
-  function store:clear(id)
-    self.data[id] = nil
-  end
-
-  function store:get(id)
-    return self.data[id]
-  end
-
-  return store
-end
-
-WindowFrames = CreateStore()
 
 local function maximizeWindow()
   local win = hs.window.focusedWindow()
