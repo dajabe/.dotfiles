@@ -13,6 +13,9 @@ vim.keymap.set('n', '<leader>oh', '<CMD>belowright Oil<CR>', { desc = 'Open oil 
 -- multiline editing
 vim.keymap.set('v', '<leader>s', [[:s/\(.*\)/\1<Left><Left>]])
 
+-- Paste contents of clipboard over current selection
+vim.keymap.set('x', '<leader>p', [["_dP]])
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
