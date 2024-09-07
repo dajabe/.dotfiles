@@ -25,6 +25,9 @@ alias la='ls -a'
 alias lt='ls --tree'
 alias ll='ls -Alh'
 
+# yay
+alias yeet='yay -Rcs'
+
 # ps
 alias psa='ps -A | grep'
 
