@@ -42,6 +42,14 @@ local function show_mode()
   return mode_map[mode] or mode
 end
 
+local function custom_location()
+  local line = vim.fn.line '.'
+  local total_lines = vim.fn.line '$'
+  local col = vim.fn.charcol '.'
+  local line_len = vim.fn.charcol '$'
+  return string.format('%3d %1d %1d:%-2d', total_lines, line_len, line, col)
+end
+
 return {
   'nvim-lualine/lualine.nvim',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -94,13 +102,13 @@ return {
         lualine_c = { { custom_fname } },
         lualine_x = { 'encoding', 'fileformat', 'filetype' },
         lualine_y = { 'progress' },
-        lualine_z = { 'location' },
+        lualine_z = { custom_location },
       },
       inactive_sections = {
         lualine_a = {},
         lualine_b = {},
         lualine_c = { 'filename' },
-        lualine_x = { 'location' },
+        lualine_x = { custom_location },
         lualine_y = {},
         lualine_z = {},
       },

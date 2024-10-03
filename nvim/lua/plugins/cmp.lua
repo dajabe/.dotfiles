@@ -32,6 +32,7 @@ return { -- Autocompletion
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
     luasnip.config.setup {}
+    local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
     cmp.setup {
       snippet = {
@@ -84,6 +85,7 @@ return { -- Autocompletion
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
         { name = 'path' },
+        { name = 'buffer', keyword_length = 3 },
       },
     }
   end,

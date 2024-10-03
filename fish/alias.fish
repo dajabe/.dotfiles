@@ -56,9 +56,6 @@ abbr -a cvrl "cv releases"
 abbr -a cvb "cv builds"
 abbr -a cvps "cv ps"
 
-# gh
-abbr -a ghpr  gh pr create --fill
-
 # Ruby
 abbr -a rc    bundle exec rubocop
 abbr -a rdbm   rake db:migrate
@@ -76,6 +73,10 @@ alias ss='short story --git-branch-short'
 
 # npm
 abbr -a nrd npm run dev
+
+# gh
+abbr -a ghpr  gh pr create --fill
+abbr -a gpv  gh pr view --web
 
 # git
 alias git=hub
