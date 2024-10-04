@@ -1,17 +1,27 @@
 [user]
-	name = David Benton
-	email = djb@dajabe.nz
+  name = David Benton
+  email = djb@dajabe.nz
+
+[alias]
+  a = add
 
 [push]
-	default = current
-	followTags = true
-	autoSetupRemote = true
-
-[push]
-	rebase = true
+  default = current
+  followTags = true
+  autoSetupRemote = true
+  rebase = true
 
 [init]
-	defaultBranch = main
+  defaultBranch = main
+
+[branch]
+  sort = -committerdate
+
+[column]
+  ui = auto
+
+[commit]
+  gpgsign = true
 
 [gpg]
   format = ssh
@@ -20,17 +30,12 @@
   program = "/opt/1Password/op-ssh-sign"
   allowedSignersFile = "~/.config/git/allowed-signers"
 
-[commit]
-  gpgsign = true
-
 [hub]
   protocol = ssh
+
 [diff "image"]
-	textconv = imgcat
-	command = imgdiff
+  textconv = imgcat
+  command = imgdiff
+
 [core]
-	attributesfile = ~/.gitattributes
-[column]
-	ui = auto
-[branch]
-	sort = -committerdate
+  attributesfile = ~/.gitattributes

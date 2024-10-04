@@ -14,6 +14,7 @@ alias refish='exec fish'
 
 # Vim
 alias vi=nvim
+alias vimdiff='nvim -d'
 
 # Scratchy
 alias scr=scratchy
@@ -95,6 +96,7 @@ abbr -a gco     g checkout
 abbr -a gcop    g checkout -p
 abbr -a gcs     g checkout - 
 abbr -a gd      g diff
+abbr -a gdt     g difftool
 abbr -a gdi     "g --no-pager -c diff.image.textconv=imgcat -c diff.image.command=imgdiff diff"
 abbr -a gds     g diff --staged
 abbr -a gf      g fetch
