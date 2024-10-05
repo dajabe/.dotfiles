@@ -22,11 +22,10 @@ function tms
   if test -z $TMUX
     tmux new-session -x- -y- -dc "$PWD" -s "$session_name" -n $window_name
     tmux send-keys "$edit_cmd" C-m
-    tmux split-window -v -l "$split_size" -c "$PWD"
+    tmux new-window -c "$PWD"
     if test -n $setup_cmd
       tmux send-keys "$setup_cmd" C-m
     end
-    tmux select-pane -t 0
     tmux attach -t "$session_name"
   else
     echo 'launching from inside tmux'
@@ -34,14 +33,12 @@ function tms
     if test -z $setup_cmd
       tmux switch-client -t "$session_name"\; \
         send-keys "$edit_cmd" C-m\; \
-        split-window -v -l "$split_size" -c "$PWD"\; \
+        new-window -c "$PWD"\; \
         send-keys "$setup_cmd" C-m\; \
-        select-pane -t 0
     else
       tmux switch-client -t "$session_name"\; \
         send-keys "$edit_cmd" C-m\; \
-        split-window -v -l "$split_size" -c "$PWD"\; \
-        select-pane -t 0
+        new-window -c "$PWD"\; \
     end
   end
 end

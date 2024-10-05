@@ -30,3 +30,21 @@ zoxide init fish | source
 fzf --fish | source
 # mise activate fish | source
 starship init fish | source  
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+if test -f /home/djb/mambaforge/bin/conda
+    eval /home/djb/mambaforge/bin/conda "shell.fish" "hook" $argv | source
+else
+    if test -f "/home/djb/mambaforge/etc/fish/conf.d/conda.fish"
+        . "/home/djb/mambaforge/etc/fish/conf.d/conda.fish"
+    else
+        set -x PATH "/home/djb/mambaforge/bin" $PATH
+    end
+end
+
+if test -f "/home/djb/mambaforge/etc/fish/conf.d/mamba.fish"
+    source "/home/djb/mambaforge/etc/fish/conf.d/mamba.fish"
+end
+# <<< conda initialize <<<
+

@@ -17,6 +17,7 @@ return {
       bash = { 'shfmt' },
       sh = { 'shfmt' },
       javascript = { 'prettier' },
+      python = { 'blue' },
     },
     format_on_save = function(buf)
       return {

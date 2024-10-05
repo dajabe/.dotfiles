@@ -12,6 +12,9 @@ abbr -a wttr    curl wttr.in/
 alias reload='source $HOME/.config/fish/config.fish'
 alias refish='exec fish'
 
+# sc-im
+alias sc='sc-im'
+
 # Vim
 alias vi=nvim
 alias vimdiff='nvim -d'

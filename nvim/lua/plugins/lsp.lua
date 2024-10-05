@@ -125,6 +125,23 @@ return { -- LSP Configuration & Plugins
 
     nvim_lsp.denols.setup {}
     nvim_lsp.solargraph.setup {}
+
+    require('lspconfig').pylsp.setup {
+
+      settings = {
+        pylsp = {
+          plugins = {
+            black = { enabled = true },
+            autopep8 = { enabled = false },
+            yapf = { enabled = false },
+            pylint = { enabled = true, executable = 'pylint' },
+            pyflakes = { enabled = false },
+            pycodestyle = { enabled = false },
+          },
+        },
+      },
+    }
+
     -- require('lspconfig').rubocop.setup {}
     -- require('lspconfig').solargraph.setup {
     --   init_options = {
