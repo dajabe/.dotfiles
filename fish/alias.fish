@@ -32,6 +32,10 @@ alias ll='ls -Alh'
 # yay
 alias yeet='yay -Rcs'
 
+# pbcopy / pbpaste
+alias pbc=pbcopy
+alias pbp=pbpaste
+
 # ps
 alias psa='ps -A | grep'
 
