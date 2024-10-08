@@ -29,8 +29,8 @@ function po
       echo "found project owner directory"
     else
       printf "Owner directory %s doesn't exist.\n" $project_owner_dir
-      read -P "Create directory? (y/N): " create
-      if test "$create" = y -o "$create" = Y
+      read -P "Create directory? (y/N): " create_owner
+      if test "$create_owner" = y -o "$create_owner" = Y
         printf "Creating directory %s\n" $project_owner_dir
         mkdir $project_owner_dir
       else
@@ -42,8 +42,8 @@ function po
     set project_owner_dir "$dev_dir/$project_owner"
   end
 
+  set project_name (string lower (string join '-' $argv))
   if set -q _flag_new
-    set project_name (string lower (string join '-' $argv))
     set project_dir "$project_owner_dir/$project_name"
     if test -d $project_dir
       printf "Project directory exists: %s" $project_dir
@@ -59,6 +59,18 @@ function po
     else
       set query (string join ' ' $argv)
       set project_dir (find $dev_dir -mindepth 2 -maxdepth 2 -type d | fzf $fzf_opts -1 -0 --query "$query")
+      if test $status -ne 0
+        set project_dir "$project_owner_dir/$project_name"
+        printf "No project found at:\n\t %s" $project_dir
+        read -P "Create project? (y/N): " create_project
+        if test "$create_project" = y -o "$create_project" = Y
+          printf "Creating project directory %s\n" $project_dir
+          mkdir $project_dir
+        else
+          echo "No project found or created"
+          return 1
+        end
+      end
     end
   end
 
