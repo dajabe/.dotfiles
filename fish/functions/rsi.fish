@@ -1,4 +1,4 @@
-function respec
+function rsi
     # Capture the output in a file
     set -l temp_file (mktemp)
     rspec $argv | tee $temp_file >/dev/tty
