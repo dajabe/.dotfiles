@@ -98,10 +98,12 @@ return { -- LSP Configuration & Plugins
     }
 
     local nvim_lsp = require 'lspconfig'
-    nvim_lsp.gopls.setup {}
+    nvim_lsp.gopls.setup {
+      capabilities = capabilities,
+    }
 
     nvim_lsp.ruby_lsp.setup {
-      capabilities = require('cmp_nvim_lsp').default_capabilities(),
+      capabilities = capabilities,
       vscode = true,
       settings = {
         rubocop = {
@@ -113,21 +115,27 @@ return { -- LSP Configuration & Plugins
     }
 
     nvim_lsp.denols.setup {
+      capabilities = capabilities,
       on_attach = on_attach,
       root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
     }
 
     nvim_lsp.ts_ls.setup {
+      capabilities = capabilities,
       on_attach = on_attach,
       root_dir = nvim_lsp.util.root_pattern 'package.json',
       single_file_support = false,
     }
 
-    nvim_lsp.denols.setup {}
-    nvim_lsp.solargraph.setup {}
+    nvim_lsp.denols.setup {
+      capabilities = capabilities,
+    }
+    nvim_lsp.solargraph.setup {
+      capabilities = capabilities,
+    }
 
     require('lspconfig').pylsp.setup {
-
+      capabilities = capabilities,
       settings = {
         pylsp = {
           plugins = {
@@ -141,12 +149,5 @@ return { -- LSP Configuration & Plugins
         },
       },
     }
-
-    -- require('lspconfig').rubocop.setup {}
-    -- require('lspconfig').solargraph.setup {
-    --   init_options = {
-    --     formatting = false,
-    --   },
-    -- }
   end,
 }

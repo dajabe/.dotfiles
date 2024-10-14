@@ -1,5 +1,8 @@
 return { -- Autocompletion
-  'hrsh7th/nvim-cmp',
+  -- 'hrsh7th/nvim-cmp',
+  'iguanacucumber/magazine.nvim',
+  name = 'nvim-cmp', -- Otherwise highlighting gets messed up
+
   event = 'InsertEnter',
   dependencies = {
     -- Snippet Engine & its associated nvim-cmp source
@@ -20,6 +23,7 @@ return { -- Autocompletion
     'hrsh7th/cmp-path',
     'mtoohey31/cmp-fish',
     'SergioRibera/cmp-dotenv',
+    'ray-x/cmp-treesitter',
 
     -- If you want to add a bunch of pre-configured snippets,
     --    you can use this plugin to help you. It even has snippets
@@ -32,7 +36,6 @@ return { -- Autocompletion
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
     luasnip.config.setup {}
-    local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
     cmp.setup {
       snippet = {
