@@ -97,7 +97,15 @@ return { -- LSP Configuration & Plugins
       },
     }
 
+    -- This is stuff I've written
     local nvim_lsp = require 'lspconfig'
+    local util = require 'lspconfig/util'
+    local is_prettier_installed = require('dajabe.helpers').is_prettier_installed
+
+    local function project_file_exists(root_dir, filepath)
+      return vim.fn.filereadable(root_dir .. '/' .. filepath) == 1
+    end
+
     nvim_lsp.gopls.setup {
       capabilities = capabilities,
     }
@@ -116,20 +124,60 @@ return { -- LSP Configuration & Plugins
 
     nvim_lsp.denols.setup {
       capabilities = capabilities,
-      on_attach = on_attach,
-      root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
+      single_file_support = false,
+      root_dir = util.root_pattern('deno.json', 'deno.jsonc'),
+      init_options = {
+        enable = true,
+        lint = true,
+        unstable = true,
+        suggest = {
+          imports = {
+            hosts = {
+              ['https://deno.land'] = true,
+              ['https://cdn.nest.land'] = true,
+              ['https://crux.land'] = true,
+            },
+          },
+        },
+      },
     }
 
     nvim_lsp.ts_ls.setup {
       capabilities = capabilities,
-      on_attach = on_attach,
-      root_dir = nvim_lsp.util.root_pattern 'package.json',
-      single_file_support = false,
+      root_dir = function(fname)
+        return util.root_pattern 'tsconfig.json'(fname) or util.root_pattern('package.json', 'jsconfig.json')(fname)
+      end,
+      init_options = {
+        preferences = {
+          disableSuggestions = false,
+        },
+      },
+      settings = {
+        typescript = {
+          format = {
+            enable = false, -- Disable formatting
+          },
+        },
+        javascript = {
+          format = {
+            enable = false, -- Disable formatting
+          },
+        },
+      },
+      on_attach = function(client, _)
+        if is_prettier_installed() then
+          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.documentRangeFormattingProvider = false
+        end
+      end,
+      on_new_config = function(_, new_root_dir)
+        local is_deno = project_file_exists(new_root_dir, 'deno.json') or project_file_exists(new_root_dir, 'deno.jsonc')
+        if is_deno then
+          return false
+        end
+      end,
     }
 
-    nvim_lsp.denols.setup {
-      capabilities = capabilities,
-    }
     nvim_lsp.solargraph.setup {
       capabilities = capabilities,
     }
