@@ -11,10 +11,15 @@ vim.keymap.set('n', '<leader>ov', '<CMD>vertical Oil<CR>', { desc = 'Open oil fi
 vim.keymap.set('n', '<leader>oh', '<CMD>belowright Oil<CR>', { desc = 'Open oil file browser in a horizontal pane' })
 
 -- multiline editing
-vim.keymap.set('v', '<leader>s', [[:s/\(.*\)/\1<Left><Left>]])
+-- vim.keymap.set('v', '<leader>s', [[:s/\(.*\)/\1<Left><Left>]])
 
 -- Paste contents of clipboard over current selection
 vim.keymap.set('x', '<leader>p', [["_dP]])
+
+-- Copy the the current file path to clipboard
+vim.keymap.set('n', '<leader>cp', function()
+  vim.fn.setreg('*', vim.fn.expand '%')
+end, { desc = 'Copy current file path to system clipboard' })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })

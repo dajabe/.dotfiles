@@ -2,7 +2,7 @@ function po
   set -l project_owner "dajabe"
   set -l dev_dir "$HOME/dev"
 
-  argparse 'h/help' 'o/owner=' 'n/new' -- $argv
+  argparse 'h/help' 'o/owner=' 'n/new' 'g/git=' -- $argv
   or return
 
   if set -q _flag_help
@@ -10,6 +10,7 @@ function po
     printf "Opens a tmux session to a existing project or creates a new project\n"
     printf "\v"
     printf "-n, --new\tCreate a new project\n"
+    printf "-g, --git\tCreate a new project by cloning a git repo\n"
     printf "-o, --owner\tSet project owner (default is %s)\n" $project_owner
     printf "-h, --help\tDisplay this help\n"
     return
@@ -19,6 +20,14 @@ function po
   if not type -q fzf
       echo "Error: fzf is not installed. Please install it to use fuzzy finding."
       return 1
+  end
+
+  # po -g git@github.com:DocSpring/docker-debian-ruby-jemalloc.git
+  if set -q _flag_git 
+    set project_owner (string lower (echo $_flag_git | cut -d':' -f2 | cut -d'/' -f1))
+    set project_name (echo $_flag_git | cut -d'/' -f2 | sed 's/\.git$//')
+  else
+    set project_name (string lower (string join '-' $argv))
   end
 
   # set owner_dirs (find $dev_dir -mindepth 1 -maxdepth 1 -type d)
@@ -42,14 +51,23 @@ function po
     set project_owner_dir "$dev_dir/$project_owner"
   end
 
-  set project_name (string lower (string join '-' $argv))
-  if set -q _flag_new
+  if set -q _flag_new; or set -q _flag_git
     set project_dir "$project_owner_dir/$project_name"
+
     if test -d $project_dir
       printf "Project directory exists: %s" $project_dir
     else
       printf "Creating project directory: %s" $project_dir
       mkdir $project_dir
+    end
+
+    if set -q _flag_git
+      if test -z (ls -A $project_dir)
+        git clone $_flag_git $project_dir
+        printf "Repository cloned into: %s\n" $project_dir
+      else
+        printf "Directory is not empty, skipping clone: %s\n" $project_dir
+      end
     end
   else
     set fzf_opts --height '20%' --border --reverse --preview 'tree -L 1 {}' --preview-window right:40%:wrap

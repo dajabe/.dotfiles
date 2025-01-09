@@ -23,6 +23,18 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 --     vim.lsp.buf.format()
 --   end,
 -- })
+--
+local function detect_go_html_tmpl()
+  local extension = vim.fn.expand '%:e'
+  if extension == 'html' and vim.fn.search '{{' ~= 0 then
+    vim.bo.filetype = 'gohtmltmpl'
+  end
+end
+
+vim.api.nvim_create_autocmd({ 'BufEnter', 'BufRead', 'BufNewFile' }, {
+  pattern = '*.html',
+  callback = detect_go_html_tmpl,
+})
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info

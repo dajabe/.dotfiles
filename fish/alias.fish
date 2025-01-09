@@ -12,6 +12,12 @@ abbr -a wttr    curl wttr.in/
 alias reload='source $HOME/.config/fish/config.fish'
 alias refish='exec fish'
 
+# Mise
+alias m=mise
+
+# po
+alias pog='po -g'
+
 # sc-im
 alias sc='sc-im'
 
@@ -100,6 +106,7 @@ abbr -a gcam    g commit -am
 abbr -a gcl     g clone
 abbr -a gcm     g commit -m
 abbr -a gco     g checkout
+abbr -a gnb     g checkout -b
 abbr -a gcop    g checkout -p
 abbr -a gcs     g checkout - 
 abbr -a gd      g diff
@@ -111,7 +118,7 @@ abbr -a gfc     g findcommit
 abbr -a gfm     g findmessage
 abbr -a gl      g log
 abbr -a gll     g log --name-status HEAD^..HEAD
-abbr -a glol    "g log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+abbr -a glol    "g log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -n 10"
 abbr -a gm      g merge
 abbr -a gmm     g merge main 
 abbr -a gp      g push

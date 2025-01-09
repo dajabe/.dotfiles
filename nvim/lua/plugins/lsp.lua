@@ -100,11 +100,9 @@ return { -- LSP Configuration & Plugins
     -- This is stuff I've written
     local nvim_lsp = require 'lspconfig'
     local util = require 'lspconfig/util'
-    local is_prettier_installed = require('dajabe.helpers').is_prettier_installed
-
-    local function project_file_exists(root_dir, filepath)
-      return vim.fn.filereadable(root_dir .. '/' .. filepath) == 1
-    end
+    local helpers = require 'dajabe.helpers'
+    local is_prettier_installed = helpers.is_prettier_installed
+    local project_file_exists = helpers.project_file_exists
 
     nvim_lsp.gopls.setup {
       capabilities = capabilities,
