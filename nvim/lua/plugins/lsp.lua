@@ -140,6 +140,14 @@ return { -- LSP Configuration & Plugins
       },
     }
 
+    local function config_file_exists(root_dir, config_files)
+      for config_file in pairs(config_files) do
+        if project_file_exists(root_dir, config_file) then
+          return true
+        end
+      end
+    end
+
     nvim_lsp.ts_ls.setup {
       capabilities = capabilities,
       root_dir = function(fname)
@@ -169,10 +177,19 @@ return { -- LSP Configuration & Plugins
         end
       end,
       on_new_config = function(_, new_root_dir)
-        local is_deno = project_file_exists(new_root_dir, 'deno.json') or project_file_exists(new_root_dir, 'deno.jsonc')
+        local is_deno = config_file_exists(new_root_dir, { 'deno.json', 'deno.jsonc' })
         if is_deno then
           return false
         end
+      end,
+    }
+
+    nvim_lsp.eslint.setup {
+      on_attach = function(_, bufnr)
+        vim.api.nvim_create_autocmd('BufWritePre', {
+          buffer = bufnr,
+          command = 'EslintFixAll',
+        })
       end,
     }
 
