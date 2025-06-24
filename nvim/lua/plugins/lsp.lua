@@ -49,17 +49,7 @@ return { -- LSP Configuration & Plugins
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
-    --  Add any additional override configuration in the following tables. Available keys are:
-    --  - cmd (table): Override the default command used to start the server
-    --  - filetypes (table): Override the default list of associated filetypes for the server
-    --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-    --  - settings (table): Override the default settings passed when initializing the server.
-    --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
     local servers = {
-      solargraph = {},
-      ruby_lsp = {
-        vscode = true,
-      },
       lua_ls = {
         settings = {
           Lua = {
@@ -77,7 +67,7 @@ return { -- LSP Configuration & Plugins
           },
         },
       },
-      -- csharp_ls = {},
+      csharp_ls = {},
     }
     require('lspconfig-bundler').setup()
     require('mason').setup()
@@ -89,6 +79,8 @@ return { -- LSP Configuration & Plugins
     -- require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
     require('mason-lspconfig').setup {
+      ensure_installed = vim.tbl_keys(servers),
+      automatic_installation = true,
       handlers = {
         function(server_name)
           local server = servers[server_name] or {}
