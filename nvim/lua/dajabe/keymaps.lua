@@ -25,9 +25,9 @@ end, { desc = 'Copy current file path to system clipboard' })
 -- vim.keymap.set('n', '[d', vim.diagnostic.jump(1, { severity = vim.diagnostic.severity.ERROR }), { desc = 'Go to previous [D]iagnostic message' })
 -- vim.keymap.set('n', ']d', vim.diagnostic.jump { count = -1, severity = vim.diagnostic.severity.ERROR }, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
--- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
-vim.keymap.set('n', '<leader>q', ':qa<CR>', { desc = '[Q]uit [A]ll windows if no changes made' })
+vim.keymap.set('n', '<leader>Q', ':qa<CR>', { desc = '[Q]uit [A]ll windows if no changes made' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which

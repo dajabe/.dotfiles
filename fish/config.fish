@@ -14,6 +14,8 @@ fish_add_path -m --path ~/.local/bin
 # fish_add_path ~/.local/share/mise/shims
 fish_add_path -m --path $HOME/bin
 
+fish_add_path -m --path $HOME/.dotnet
+
 if status is-interactive
   mise activate fish | source
 else

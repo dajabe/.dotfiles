@@ -154,6 +154,13 @@ return { -- LSP Configuration & Plugins
         return util.root_pattern 'tsconfig.json'(fname) or util.root_pattern('package.json', 'jsconfig.json')(fname)
       end,
       init_options = {
+        -- plugins = {
+        --   {
+        --     name = '@vue/typescript-plugin',
+        --     location = '/usr/local/lib/node_modules/@vue/typescript-plugin',
+        --     languages = { 'javascript', 'typescript', 'vue' },
+        --   },
+        -- },
         preferences = {
           disableSuggestions = false,
         },
@@ -176,12 +183,27 @@ return { -- LSP Configuration & Plugins
           client.server_capabilities.documentRangeFormattingProvider = false
         end
       end,
+      filetypes = {
+        'javascript',
+        'typescript',
+        -- 'vue',
+      },
       on_new_config = function(_, new_root_dir)
         local is_deno = config_file_exists(new_root_dir, { 'deno.json', 'deno.jsonc' })
         if is_deno then
           return false
         end
       end,
+    }
+
+    -- vim.lsp.enable 'vuels'
+    nvim_lsp.volar.setup {
+      filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+      init_options = {
+        vue = {
+          hybridMode = false,
+        },
+      },
     }
 
     nvim_lsp.eslint.setup {
@@ -195,6 +217,7 @@ return { -- LSP Configuration & Plugins
 
     nvim_lsp.solargraph.setup {
       capabilities = capabilities,
+      root_dir = util.root_pattern('Gemfile', '.git') and util.root_pattern 'solargraph.yml',
     }
 
     require('lspconfig').pylsp.setup {
