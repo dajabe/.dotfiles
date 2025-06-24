@@ -77,6 +77,7 @@ return { -- LSP Configuration & Plugins
           },
         },
       },
+      -- csharp_ls = {},
     }
     require('lspconfig-bundler').setup()
     require('mason').setup()

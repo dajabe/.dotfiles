@@ -21,6 +21,11 @@ vim.keymap.set('n', '<leader>cp', function()
   vim.fn.setreg('*', vim.fn.expand '%')
 end, { desc = 'Copy current file path to system clipboard' })
 
+-- Show messages in Telescope picker
+vim.keymap.set('n', '<leader>ce', function()
+  require('dajabe.messages').show_messages_picker()
+end, { desc = 'Show messages in Telescope picker' })
+
 -- Diagnostic keymaps
 -- vim.keymap.set('n', '[d', vim.diagnostic.jump(1, { severity = vim.diagnostic.severity.ERROR }), { desc = 'Go to previous [D]iagnostic message' })
 -- vim.keymap.set('n', ']d', vim.diagnostic.jump { count = -1, severity = vim.diagnostic.severity.ERROR }, { desc = 'Go to next [D]iagnostic message' })
