@@ -1,3 +1,4 @@
 {
-  "diagnostics.globals": ["hs", "vim"]
+  "diagnostics.globals": ["hs", "vim"],
+  "runtime.version": "LuaJIT"
 }

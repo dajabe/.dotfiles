@@ -40,4 +40,3 @@ function M.show_messages_picker()
 end
 
 return M
-
