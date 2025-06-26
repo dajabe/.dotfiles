@@ -50,3 +50,5 @@ if test -f "/home/djb/mambaforge/etc/fish/conf.d/mamba.fish"
 end
 # <<< conda initialize <<<
 
+
+alias claude="/Users/djb/.claude/local/claude"

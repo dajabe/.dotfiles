@@ -1,5 +1,54 @@
 local M = {}
 
+-- LSP exclusion configuration
+local lsp_exclusions = {
+  filetypes = {
+    'gitcommit',
+    'gitrebase',
+    'help',
+    'man',
+    'qf',
+    'oil',
+  },
+
+  buffer_patterns = {
+    '%.git/',
+    'COMMIT_EDITMSG',
+    'MERGE_MSG',
+    'TAG_EDITMSG',
+    'git%-rebase%-todo',
+  },
+
+  env_variables = {
+    'NVIM_NO_LSP',
+  },
+}
+
+function M.should_setup_lsp()
+  -- Check filetype exclusions
+  local current_filetype = vim.bo.filetype
+  if vim.tbl_contains(lsp_exclusions.filetypes, current_filetype) then
+    return false
+  end
+
+  -- Check buffer name patterns
+  local bufname = vim.api.nvim_buf_get_name(0)
+  for _, pattern in ipairs(lsp_exclusions.buffer_patterns) do
+    if bufname:match(pattern) then
+      return false
+    end
+  end
+
+  -- Check environment variable exclusions
+  for _, env_var in ipairs(lsp_exclusions.env_variables) do
+    if os.getenv(env_var) then
+      return false
+    end
+  end
+
+  return true
+end
+
 function M.config_file_exists(root_dir, config_files)
   local helpers = require 'dajabe.helpers'
   for config_file in pairs(config_files) do

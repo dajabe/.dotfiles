@@ -8,6 +8,12 @@ return {
     { 'j-hui/fidget.nvim', opts = {} },
   },
   config = function()
+    -- Early exit if LSP should not be setup for current context
+    local utils = require 'plugins.lsp.utils'
+    if not utils.should_setup_lsp() then
+      return
+    end
+
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event)
