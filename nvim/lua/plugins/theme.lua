@@ -1,15 +1,25 @@
+-- return {
+--   'folke/tokyonight.nvim',
+--   lazy = false,
+--   priority = 1000,
+--   config = function()
+--     vim.cmd.colorscheme 'tokyonight-night'
+--     vim.cmd.hi 'Comment gui=none'
+--     vim.cmd [[
+--   highlight Normal guibg=none
+--   highlight NonText guibg=none
+--   highlight Normal ctermbg=none
+--   highlight NonText ctermbg=none
+-- ]]
+--   end,
+-- }
 return {
-  'folke/tokyonight.nvim',
+  'vague2k/vague.nvim',
   lazy = false,
   priority = 1000,
   config = function()
-    vim.cmd.colorscheme 'tokyonight-night'
-    vim.cmd.hi 'Comment gui=none'
-    vim.cmd [[
-  highlight Normal guibg=none
-  highlight NonText guibg=none
-  highlight Normal ctermbg=none
-  highlight NonText ctermbg=none
-]]
+    require('vague').setup {
+      vim.cmd.colorscheme 'vague',
+    }
   end,
 }
