@@ -51,4 +51,3 @@ end
 # <<< conda initialize <<<
 
 
-alias claude="/Users/djb/.claude/local/claude"

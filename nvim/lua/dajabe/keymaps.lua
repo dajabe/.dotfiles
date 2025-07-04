@@ -8,7 +8,8 @@ vim.keymap.set('n', '<leader>ov', '<CMD>vertical Oil<CR>', { desc = 'Open oil fi
 vim.keymap.set('n', '<leader>oh', '<CMD>belowright Oil<CR>', { desc = 'Open oil file browser in a horizontal pane' })
 
 -- Paste contents of clipboard over current selection
-vim.keymap.set('x', '<leader>p', [["_dP]])
+vim.keymap.set('x', '<leader>p', [["_dp]])
+vim.keymap.set('x', '<leader>P', [["_dP]])
 
 -- Copy the the current file path to clipboard
 vim.keymap.set('n', '<leader>cp', function()
