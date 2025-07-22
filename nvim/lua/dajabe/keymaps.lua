@@ -16,10 +16,10 @@ vim.keymap.set('n', '<leader>cp', function()
   vim.fn.setreg('*', vim.fn.expand '%')
 end, { desc = 'Copy current file path to system clipboard' })
 
--- Show messages in Telescope picker
+-- Show messages in scratch buffer
 vim.keymap.set('n', '<leader>ce', function()
-  require('dajabe.messages').show_messages_picker()
-end, { desc = 'Show messages in Telescope picker' })
+  require('dajabe.messages').show_messages_scratch()
+end, { desc = 'Show messages in scratch buffer' })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })

@@ -26,16 +26,21 @@ local mason_servers = {
 function M.setup()
   require('mason').setup()
 
-  require('mason-lspconfig').setup {
-    ensure_installed = vim.tbl_keys(mason_servers),
-    automatic_installation = true,
-    handlers = {
-      function(server_name)
-        local server_config = mason_servers[server_name] or {}
-        require('lspconfig')[server_name].setup(server_config)
-      end,
-    },
-  }
+  -- First setup the servers directly with lspconfig
+  local lspconfig = require('lspconfig')
+  for server_name, server_config in pairs(mason_servers) do
+    lspconfig[server_name].setup(server_config)
+  end
+
+  -- Then setup mason-lspconfig just for ensuring packages are installed
+  -- We delay this to avoid the automatic setup issues
+  vim.defer_fn(function()
+    require('mason-lspconfig').setup {
+      ensure_installed = vim.tbl_keys(mason_servers),
+      automatic_installation = false,
+      handlers = nil, -- Explicitly set handlers to nil to disable automatic setup
+    }
+  end, 100)
 end
 
 function M.get_mason_servers()

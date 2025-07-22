@@ -10,11 +10,12 @@ end
 set fish_greeting
 
 # Pathing
-fish_add_path -m --path ~/.local/bin
+fish_add_path -m --path $HOME/.local/bin
 # fish_add_path ~/.local/share/mise/shims
 fish_add_path -m --path $HOME/bin
 
 fish_add_path -m --path $HOME/.dotnet
+fish_add_path -m --path $HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin
 
 if status is-interactive
   mise activate fish | source
