@@ -17,3 +17,12 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufRead', 'BufNewFile' }, {
   pattern = '*.html',
   callback = detect_go_html_tmpl,
 })
+
+-- YAML indentation settings
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'yaml',
+  callback = function()
+    -- Prevent auto-dedenting on # and :
+    vim.bo.indentkeys = vim.bo.indentkeys:gsub('0#', ''):gsub('<:>', '')
+  end,
+})

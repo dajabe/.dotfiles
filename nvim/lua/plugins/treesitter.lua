@@ -1,40 +1,52 @@
-return { -- Highlight, edit, and navigate code
-  'nvim-treesitter/nvim-treesitter',
-  'yioneko/nvim-yati',
-  build = ':TSUpdate',
-  config = function()
-    -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-
-    ---@diagnostic disable-next-line: missing-fields
-    require('nvim-treesitter.configs').setup {
-      yati = {
-        enable = true,
-        default_lazy = true,
-        default_fallback = 'auto',
-      },
-      ensure_installed = {
-        'bash',
-        'c',
-        'html',
-        'lua',
-        'markdown',
-        'vim',
-        'vimdoc',
-        'ruby',
-        'embedded_template',
-        'dockerfile',
-      },
-      -- Autoinstall languages that are not installed
-      auto_install = true,
-      highlight = { enable = true },
-      indent = { enable = false },
-    }
-
-    -- There are additional nvim-treesitter modules that you can use to interact
-    -- with nvim-treesitter. You should go explore a few and see what interests you:
-    --
-    --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-    --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-    --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
-  end,
+return {
+  {
+    'nvim-treesitter/nvim-treesitter',
+    lazy = false, -- Treesitter should not be lazy loaded
+    build = ':TSUpdate',
+    dependencies = {
+      'RRethy/nvim-treesitter-endwise',
+    },
+    config = function()
+      ---@diagnostic disable-next-line: missing-fields
+      require('nvim-treesitter.configs').setup {
+        ensure_installed = {
+          'bash',
+          'c',
+          'html',
+          'lua',
+          'markdown',
+          'vim',
+          'vimdoc',
+          'ruby',
+          'embedded_template',
+          'dockerfile',
+          'javascript',
+          'typescript',
+          'python',
+        },
+        auto_install = true,
+        highlight = {
+          enable = true,
+          -- Disable vim syntax highlighting to prevent conflicts
+          additional_vim_regex_highlighting = false,
+        },
+        indent = {
+          enable = true,
+          disable = { 'yaml' }, -- YAML has better indentation with Vim's built-in engine
+        },
+        endwise = {
+          enable = true,
+        },
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = '<CR>',
+            node_incremental = '<CR>',
+            scope_incremental = '<S-CR>',
+            node_decremental = '<BS>',
+          },
+        },
+      }
+    end,
+  },
 }
