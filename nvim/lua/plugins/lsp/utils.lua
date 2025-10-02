@@ -74,7 +74,6 @@ end
 function M.load_servers()
   local servers_path = vim.fn.stdpath 'config' .. '/lua/plugins/lsp/servers'
   local server_files = vim.fn.globpath(servers_path, '*.lua', false, true)
-  local lspconfig = require 'lspconfig'
 
   for _, file in ipairs(server_files) do
     local server_name = vim.fn.fnamemodify(file, ':t:r')
@@ -84,7 +83,8 @@ function M.load_servers()
       -- Each server file returns a table with server names as keys
       for name, config in pairs(server_config) do
         if type(config) == 'table' and config.capabilities then
-          lspconfig[name].setup(config)
+          vim.lsp.config(name, config)
+          vim.lsp.enable(name)
         end
       end
     end

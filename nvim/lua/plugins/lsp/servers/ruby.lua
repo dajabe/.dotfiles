@@ -1,20 +1,32 @@
 local utils = require 'plugins.lsp.utils'
-local util = require 'lspconfig/util'
 
 return {
   ruby_lsp = utils.create_server_config {
-    vscode = true,
-    filetypes = { 'ruby', 'eruby' },
-    settings = {
-      rubocop = {
-        use_bundler = true,
-        auto_correct = true,
-        auto_correct_all = true,
-      },
+    init_options = {
+      formatter = 'rubocop',
+      linters = { 'rubocop' },
     },
   },
 
-  solargraph = utils.create_server_config {
-    root_dir = util.root_pattern('Gemfile', '.git') and util.root_pattern 'solargraph.yml',
+  rubocop = utils.create_server_config {
+    cmd = { 'bundle', 'exec', 'rubocop', '--lsp' },
+    init_options = {
+      safeAutocorrect = false,
+    },
+    on_attach = function(client, bufnr)
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.buf.format({
+            async = false,
+            filter = function(c)
+              return c.name == 'rubocop'
+            end
+          })
+        end,
+      })
+    end,
   },
+
+  solargraph = utils.create_server_config {},
 }

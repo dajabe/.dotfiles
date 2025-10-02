@@ -1,11 +1,10 @@
 local utils = require 'plugins.lsp.utils'
-local util = require 'lspconfig/util'
 local helpers = require 'dajabe.helpers'
 
 return {
   denols = utils.create_server_config {
     single_file_support = false,
-    root_dir = util.root_pattern('deno.json', 'deno.jsonc'),
+    root_dir = vim.fs.root(0, { 'deno.json', 'deno.jsonc' }),
     init_options = {
       enable = true,
       lint = true,
@@ -23,9 +22,7 @@ return {
   },
 
   ts_ls = utils.create_server_config {
-    root_dir = function(fname)
-      return util.root_pattern 'tsconfig.json'(fname) or util.root_pattern('package.json', 'jsconfig.json')(fname)
-    end,
+    root_dir = vim.fs.root(0, { 'tsconfig.json', 'package.json', 'jsconfig.json' }),
     init_options = {
       preferences = {
         disableSuggestions = false,

@@ -26,10 +26,10 @@ local mason_servers = {
 function M.setup()
   require('mason').setup()
 
-  -- First setup the servers directly with lspconfig
-  local lspconfig = require 'lspconfig'
+  -- First setup the servers directly with vim.lsp.config
   for server_name, server_config in pairs(mason_servers) do
-    lspconfig[server_name].setup(server_config)
+    vim.lsp.config(server_name, server_config)
+    vim.lsp.enable(server_name)
   end
 
   -- Then setup mason-lspconfig just for ensuring packages are installed
