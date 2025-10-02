@@ -3,6 +3,10 @@ abbr -a tns     tmux new-session -s
 abbr -a tks     tmux kill-session
 abbr -a tls     tmux list-session
 abbr -a ta      tmux attach
+# session management
+alias tdw='tdc -w'
+
+abbr -a cg      convox-gateway
 
 # Weather
 alias wthr='curl wttr.in/palmerston+north'
@@ -92,13 +96,18 @@ abbr -a nrd npm run dev
 abbr -a ghpr  gh pr create --fill
 abbr -a gpv  gh pr view --web
 
+# gitui
+alias gu=gitui
+
 # git
 alias git=hub
 alias g=git
 alias gcd='cd $(g rev-parse --show-toplevel)'
 abbr -a ga      g add
 abbr -a gaa     g add .
+abbr -a gap     g add -p
 abbr -a gbd     g branch -d
+abbr -a gbD     g branch -D
 abbr -a gbl     g branch --list
 abbr -a gc      g commit
 abbr -a gca     g commit --amend
@@ -119,6 +128,7 @@ abbr -a gfm     g findmessage
 abbr -a gl      g log
 abbr -a gll     g log --name-status HEAD^..HEAD
 abbr -a glol    "g log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -n 10"
+abbr -a glg     "g log --pretty=format:'%C(bold blue)<%an>%Creset %Cgreen(%cr)%Creset %Cred%h%Creset %C(yellow)%d%Creset%n  %s' --abbrev-commit -n 10"
 abbr -a gm      g merge
 abbr -a gmm     g merge main 
 abbr -a gp      g push

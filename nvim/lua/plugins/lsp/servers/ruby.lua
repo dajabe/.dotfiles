@@ -4,6 +4,7 @@ local util = require 'lspconfig/util'
 return {
   ruby_lsp = utils.create_server_config {
     vscode = true,
+    filetypes = { 'ruby', 'eruby' },
     settings = {
       rubocop = {
         use_bundler = true,

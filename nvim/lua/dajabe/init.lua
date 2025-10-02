@@ -1,6 +1,7 @@
 require 'dajabe.options'
 require 'dajabe.keymaps'
 require 'dajabe.autocmds'
+require 'dajabe.neovide'
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info

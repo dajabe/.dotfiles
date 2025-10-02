@@ -20,6 +20,9 @@ return {
   config = function()
     require('vague').setup {
       vim.cmd.colorscheme 'vague',
+      colors = {
+        bg = '#1b182c',
+      },
     }
   end,
 }

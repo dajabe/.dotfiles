@@ -49,6 +49,6 @@ return {
 
     require('lspconfig-bundler').setup()
     require('plugins.lsp.mason').setup() -- autoload servers with mason
-    require('plugins.lsp.utils').load_servers() -- load manually defined servers
+    utils.load_servers() -- load manually defined servers
   end,
 }

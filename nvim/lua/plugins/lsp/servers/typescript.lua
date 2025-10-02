@@ -49,25 +49,17 @@ return {
         client.server_capabilities.documentRangeFormattingProvider = false
       end
     end,
-    filetypes = {
-      'javascript',
-      'typescript',
-    },
+    -- filetypes = {
+    --   'javascript',
+    --   'typescript',
+    --
+    -- },
     on_new_config = function(_, new_root_dir)
       local is_deno = utils.config_file_exists(new_root_dir, { 'deno.json', 'deno.jsonc' })
       if is_deno then
         return false
       end
     end,
-  },
-
-  volar = utils.create_server_config {
-    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-    init_options = {
-      vue = {
-        hybridMode = false,
-      },
-    },
   },
 
   eslint = utils.create_server_config {
