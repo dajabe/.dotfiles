@@ -1,0 +1,15 @@
+font-family = "Monoid Nerd Font"
+font-size = 16
+
+theme = Vague
+
+macos-shortcuts = ask
+
+macos-titlebar-style = hidden
+
+window-position-x = 10
+window-position-y = 10
+
+window-save-state = always
+
+auto-update = check

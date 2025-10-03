@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+GHOSTTY_CONF="$HOME/.config/ghostty"
+rm -rf "$GHOSTTY_CONF"
+ln -s "$(pwd)" "$GHOSTTY_CONF"

@@ -9,7 +9,7 @@
   normal = { family = "Monoid Nerd Font", style = "Regular" }
   bold = { family = "Monoid Nerd Font", style = "Bold" }
   italic = { family = "Monoid Nerd Font", style = 'Italic' }
-  size = 16.0
+  size = 14.0
 
 [env]
   TERM = 'xterm-256color'

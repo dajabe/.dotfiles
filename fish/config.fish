@@ -17,6 +17,8 @@ fish_add_path -m --path $HOME/bin
 fish_add_path -m --path $HOME/.dotnet
 fish_add_path -m --path $HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin
 
+fish_add_path /opt/homebrew/sbin
+
 if status is-interactive
   mise activate fish | source
 else
