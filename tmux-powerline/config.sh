@@ -29,7 +29,7 @@
 	export TMUX_POWERLINE_STATUS_JUSTIFICATION="centre"
 
 	# The maximum length of the left status bar.
-	export TMUX_POWERLINE_STATUS_LEFT_LENGTH="60"
+	export TMUX_POWERLINE_STATUS_LEFT_LENGTH="600"
 	# The maximum length of the right status bar.
 	export TMUX_POWERLINE_STATUS_RIGHT_LENGTH="90"
 
@@ -215,7 +215,7 @@
 	# File to be read in case the song is being read from a file
 	export TMUX_POWERLINE_SEG_NOW_PLAYING_FILE_NAME=""
 	# Maximum output length.
-	export TMUX_POWERLINE_SEG_NOW_PLAYING_MAX_LEN="400"
+	export TMUX_POWERLINE_SEG_NOW_PLAYING_MAX_LEN="800"
 	# How to handle too long strings. Can be {trim, roll}.
 	export TMUX_POWERLINE_SEG_NOW_PLAYING_TRIM_METHOD="trim"
 	# Characters per second to roll if rolling trim method is used.
