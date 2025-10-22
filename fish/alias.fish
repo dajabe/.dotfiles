@@ -85,6 +85,10 @@ abbr -a bu    b update
 
 # Rails
 alias r=rails
+abbr -a rdbd    r db:drop
+abbr -a rdbc    r db:create
+abbr -a rdbm    r db:migrate
+abbr -a rdbs    r db:seed
 
 # Shortcut
 alias ss='short story --git-branch-short'
@@ -120,7 +124,7 @@ abbr -a gcop    g checkout -p
 abbr -a gcs     g checkout - 
 abbr -a gd      g diff
 abbr -a gdt     g difftool
-abbr -a gdi     "g --no-pager -c diff.image.textconv=imgcat -c diff.image.command=imgdiff diff"
+abbr -a gdi     g diffimg
 abbr -a gds     g diff --staged
 abbr -a gf      g fetch
 abbr -a gfc     g findcommit
@@ -133,6 +137,7 @@ abbr -a gm      g merge
 abbr -a gmm     g merge main 
 abbr -a gp      g push
 abbr -a gpf     g push --force-with-lease
+abbr -a gpff    g push --force
 abbr -a gpl     g pull
 abbr -a gpull   g pull
 abbr -a gpush   g push
