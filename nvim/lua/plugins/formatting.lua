@@ -30,6 +30,7 @@ return {
       javascriptreact = js_ts_formatters,
       typescriptreact = js_ts_formatters,
       python = { 'blue' },
+      markdown = { 'markdownfmt' },
     },
     format_on_save = function(buf)
       return {

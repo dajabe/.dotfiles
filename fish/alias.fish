@@ -6,8 +6,6 @@ abbr -a ta      tmux attach
 # session management
 alias tdw='tdc -w'
 
-abbr -a cg      convox-gateway
-
 # Weather
 alias wthr='curl wttr.in/palmerston+north'
 abbr -a wttr    curl wttr.in/
@@ -57,10 +55,7 @@ alias psa='ps -A | grep'
 alias ee='espanso edit'
 
 # Convox
-alias cv=convox
-abbr -a csst "cv switch staging"
-abbr -a csus "cv switch us"
-abbr -a cseu "cv switch eu"
+alias cg="rack-gateway"
 
 abbr -a cvr "cv rack"
 abbr -a cve "cv exec"

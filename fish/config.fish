@@ -17,7 +17,7 @@ fish_add_path -m --path $HOME/bin
 fish_add_path -m --path $HOME/.dotnet
 fish_add_path -m --path $HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin
 
-fish_add_path -m --path $HOMEBREW_PREFIX/opt/postgresql@15/bin
+fish_add_path -m --path $HOMEBREW_PREFIX/opt/postgresql@17/bin
 
 fish_add_path /opt/homebrew/sbin
 
