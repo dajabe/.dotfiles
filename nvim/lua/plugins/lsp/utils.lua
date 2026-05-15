@@ -49,24 +49,25 @@ function M.should_setup_lsp()
   return true
 end
 
-function M.config_file_exists(root_dir, config_files)
-  local helpers = require 'dajabe.helpers'
-  for config_file in pairs(config_files) do
-    if helpers.project_file_exists(root_dir, config_file) then
-      return true
+function M.root_with_markers(markers)
+  return function(bufnr, on_dir)
+    local root_dir = vim.fs.root(bufnr, markers)
+    if root_dir then
+      on_dir(root_dir)
     end
   end
-  return false
 end
 
 function M.get_capabilities()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.general.positionEncodings = { 'utf-16' }
   capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
   return capabilities
 end
 
 function M.create_server_config(server_config)
   local config = server_config or {}
+  config.offset_encoding = config.offset_encoding or 'utf-16'
   config.capabilities = vim.tbl_deep_extend('force', {}, M.get_capabilities(), config.capabilities or {})
   return config
 end
@@ -82,7 +83,7 @@ function M.load_servers()
     if ok and type(server_config) == 'table' then
       -- Each server file returns a table with server names as keys
       for name, config in pairs(server_config) do
-        if type(config) == 'table' and config.capabilities then
+        if type(config) == 'table' then
           vim.lsp.config(name, config)
           vim.lsp.enable(name)
         end

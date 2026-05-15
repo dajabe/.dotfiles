@@ -8,11 +8,7 @@ return {
     { 'j-hui/fidget.nvim', opts = {} },
   },
   config = function()
-    -- Early exit if LSP should not be setup for current context
     local utils = require 'plugins.lsp.utils'
-    -- if not utils.should_setup_lsp() then
-    --   return
-    -- end
 
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
@@ -34,12 +30,16 @@ return {
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if client and client.server_capabilities.documentHighlightProvider then
+          local highlight_group = vim.api.nvim_create_augroup('kickstart-lsp-highlight-' .. event.buf, { clear = true })
+
           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+            group = highlight_group,
             buffer = event.buf,
             callback = vim.lsp.buf.document_highlight,
           })
 
           vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+            group = highlight_group,
             buffer = event.buf,
             callback = vim.lsp.buf.clear_references,
           })

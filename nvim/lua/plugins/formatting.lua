@@ -1,15 +1,15 @@
 local is_prettier_installed = require('dajabe.helpers').is_prettier_installed
 
--- Set per language lsp fallback options
-local lsp_fallback = setmetatable({
-  ruby = 'always',
-  typescript = not is_prettier_installed(),
-  javascript = not is_prettier_installed(),
-  typescriptreact = not is_prettier_installed(),
-  javascriptreact = not is_prettier_installed(),
+-- Set per language LSP formatting options.
+local lsp_format = setmetatable({
+  ruby = 'never',
+  typescript = is_prettier_installed() and 'never' or 'fallback',
+  javascript = is_prettier_installed() and 'never' or 'fallback',
+  typescriptreact = is_prettier_installed() and 'never' or 'fallback',
+  javascriptreact = is_prettier_installed() and 'never' or 'fallback',
 }, {
   __index = function()
-    return true
+    return 'fallback'
   end,
 })
 
@@ -35,7 +35,7 @@ return {
     format_on_save = function(buf)
       return {
         timeout_ms = 500,
-        lsp_fallback = lsp_fallback[vim.bo[buf].filetype],
+        lsp_format = lsp_format[vim.bo[buf].filetype],
       }
     end,
   },
