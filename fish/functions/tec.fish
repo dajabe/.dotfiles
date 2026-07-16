@@ -1,9 +1,15 @@
 function tec
   set session_name 'config'
 
+  # Determine how to connect to tmux session
+  set attach_switch "attach-session"
+  if set -q TMUX
+    set attach_switch "switch-client"
+  end
+
   if tmux has-session -t $session_name > /dev/null 2>&1
     echo "Attaching to existing $session_name session"
-    tmux attach-session -t $session_name
+    tmux $attach_switch -t $session_name
     return
   end
 
@@ -15,19 +21,6 @@ function tec
 
   set work_dots_dir "$repo_dir/.ds-dots"
   set dots_dir "$repo_dir/.dotfiles"
-
-  #
-  if type $EDITOR > /dev/null 2>&1
-    set open_editor "$EDITOR ."
-  else
-    echo "Falling back to vi"
-    if type vi > /dev/null 2>&1
-        set open_editor 'vi .'
-    else
-        echo 'vi not available and EDITOR not specified in environment'
-        return 1
-    end
-  end
 
   # Check for espanso
   if not type espanso > /dev/null 2>&1
@@ -41,37 +34,36 @@ function tec
     mkdir $HOME/.config
   end
 
+  set preview_command 'lsd --tree --depth 1 --group-directories-first'
+
   # Launch tmux session
-  tmux new-session -dAs config -n 'home/config' -c $HOME/.config $open_editor
+  tmux new-session -x- -y- -dc $HOME/.config -s $session_name -n 'home/config'
+  tmux send-keys -t $session_name:'home/config' $preview_command C-m
 
   # Add new window for dotfiles if the directory exists
   if test -d $dots_dir
-    tmux new-window -dSc $dots_dir -n 'dots' $open_editor
+    tmux new-window -t $session_name -c $dots_dir -n 'dots'
+    tmux send-keys -t $session_name:'dots' $preview_command C-m
   end
 
   # Add new window for ds-dots if the directory exists
   if test -d $work_dots_dir
-    tmux new-window -dSc $work_dots_dir -n 'work-dots' $open_editor
+    tmux new-window -t $session_name -c $work_dots_dir -n 'work-dots'
+    tmux send-keys -t $session_name:'work-dots' $preview_command C-m
   end
 
   # Add a new window for espanso config if the directory exists and espanso is installed
   if test -n "$espanso_config"; and test -d "$espanso_config"
-    tmux new-window -dSc "$espanso_config" -n 'espanso' $open_editor
-  end
-
-  # Add another window for dotfiles-shell if the directory exists
-  if test -d $repo_dir/.dotfiles
-    tmux new-window -dSc $repo_dir/.dotfiles -n 'dotfiles-shell'
-  else
-    tmux new-window -dSc $HOME/.config -n 'config-shell'
+    tmux new-window -t $session_name -c "$espanso_config" -n 'espanso'
+    tmux send-keys -t $session_name:'espanso' $preview_command C-m
   end
 
   # Select the 'dotfiles' window if it exists, otherwise select the first window
-  if tmux list-windows | grep -q 'dots'
-    tmux select-window -t 'dots'
+  if tmux list-windows -t $session_name | grep -q 'dots'
+    tmux select-window -t $session_name:'dots'
   else
-    tmux select-window -t 'home/config'
+    tmux select-window -t $session_name:'home/config'
   end
 
-  tmux attach-session -t 'config'
+  tmux $attach_switch -t $session_name
 end
