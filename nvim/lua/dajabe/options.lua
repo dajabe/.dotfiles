@@ -17,6 +17,11 @@ vim.opt.signcolumn = 'yes'
 
 vim.opt.mouse = 'a'
 
+-- Line width and wrapping
+-- vim.opt.wrap = true
+vim.opt.textwidth = 110
+-- vim.opt.linebreak = true
+
 -- Don't show the mode, since it's already in status line
 vim.opt.showmode = false
 

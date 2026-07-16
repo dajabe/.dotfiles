@@ -30,6 +30,10 @@ alias vimdiff='nvim -d'
 # Scratchy
 alias scr=scratchy
 
+# Worktree scripts
+alias wtn=setup_worktree
+alias wtr=remove_worktree
+
 # ls
 alias ls=lsd
 alias l='ls -l'
@@ -126,8 +130,8 @@ abbr -a gfc     g findcommit
 abbr -a gfm     g findmessage
 abbr -a gl      g log
 abbr -a gll     g log --name-status HEAD^..HEAD
-abbr -a glol    "g log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -n 10"
-abbr -a glg     "g log --pretty=format:'%C(bold blue)<%an>%Creset %Cgreen(%cr)%Creset %Cred%h%Creset %C(yellow)%d%Creset%n  %s' --abbrev-commit -n 10"
+abbr -a glol    "g log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cs) %C(bold blue)<%an>%Creset' --abbrev-commit -n 10"
+abbr -a glg     "g log --pretty=format:'%C(bold blue)<%an>%Creset %Cgreen(%cs - %cr)%Creset %Cred%h%Creset %C(yellow)%d%Creset%n  %s' --abbrev-commit -n 10"
 abbr -a gm      g merge
 abbr -a gmm     g merge main 
 abbr -a gp      g push
