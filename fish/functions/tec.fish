@@ -16,7 +16,7 @@ function tec
   if set -q REPOSITORY_DIR
     set repo_dir "$REPOSITORY_DIR"
   else
-    set repo_dir "$HOME/dev"
+    set repo_dir "$HOME/dev/dajabe"
   end
 
   set work_dots_dir "$repo_dir/.ds-dots"
