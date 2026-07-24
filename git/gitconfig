@@ -1,6 +1,7 @@
 [user]
   name = David Benton
   email = djb@dajabe.nz
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAbXVnTldGKsSUVUuw4xOS0InqQPaxOMjlvM1/3eR93/
 
 [alias]
   a = add

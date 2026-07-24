@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 GIT_CONF="$HOME/.gitconfig"
-rm -rf "$GIT_CONF"
-ln -s ./gitconfig "$GIT_CONF"
+GIT_CONFIG_DIR="$HOME/.config/git"
+
+mkdir -p "$GIT_CONFIG_DIR"
+
+rm -f "$GIT_CONF"
+ln -s "$SCRIPT_DIR/gitconfig" "$GIT_CONF"
+
+rm -f "$GIT_CONFIG_DIR/allowed-signers"
+ln -s "$SCRIPT_DIR/allowed-signers" "$GIT_CONFIG_DIR/allowed-signers"
