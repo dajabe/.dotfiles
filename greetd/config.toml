@@ -1,0 +1,8 @@
+[terminal]
+vt = 1
+
+[default_session]
+# TUI greeter: do not run Hyprland as the greeter compositor.
+# Hyprland is launched only after successful login.
+command = "tuigreet --time --asterisks --remember --remember-session --sessions /usr/share/wayland-sessions --cmd /usr/bin/start-hyprland"
+user = "greeter"

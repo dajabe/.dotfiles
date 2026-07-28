@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $EUID -ne 0 ]]; then
+  echo "This writes /etc/greetd; run with sudo:" >&2
+  echo "  sudo $0" >&2
+  exit 1
+fi
+
+repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+install -d -m 0755 /etc/greetd
+install -m 0644 "$repo_dir/config.toml" /etc/greetd/config.toml
+
+if getent passwd greeter >/dev/null; then
+  usermod -aG video,input,seat greeter 2>/dev/null || usermod -aG video,input greeter
+fi
+
+echo "Installed greetd config. Enable with:"
+echo "  sudo systemctl enable --now greetd"
