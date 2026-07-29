@@ -1,0 +1,108 @@
+# Wayle configuration
+#
+# Wayle reads this file from ~/.config/wayle/config.toml.
+# CLI / Settings UI changes are written to runtime.toml, which is ignored by git.
+
+[general]
+font-sans = "Inter"
+font-mono = "JetBrains Mono"
+
+[bar]
+location = "top"
+exclusive = true
+layer = "top"
+scale = 0.75
+# padding = 0.35
+padding-ends = 0.5
+module-gap = 0.5
+bg = "bg-surface"
+rounding = "none"
+button-variant = "block-prefix"
+button-rounding = "sm"
+button-group-background = "bg-elevated"
+button-group-rounding = "sm"
+button-group-padding = 0.15
+button-group-module-gap = 0.25
+button-icon-size = 0.9
+button-icon-padding = 1
+button-label-size = 0.9
+button-label-padding = 0.6
+
+# One layout for all monitors. hyprland-workspaces is monitor-specific by default,
+# so each monitor shows and click-switches only its own workspaces.
+[[bar.layout]]
+monitor = "*"
+left = ["hyprland-workspaces"]
+center = ["clock"]
+right = [
+  # "media",
+  { name = "status", modules = [
+    # "idle-inhibit",
+    "network",
+    "microphone",
+    "volume",
+    # "cpu",
+    # "ram",
+    "clock",
+    "systray",
+  ] },
+]
+
+[styling]
+scale = 1
+rounding = "sm"
+theme-provider = "wayle"
+matugen-scheme = "tonal-spot"
+matugen-light = false
+
+[modules.hyprland-workspaces]
+min-workspace-count = 5
+monitor-specific = true
+show-special = true
+display-mode = "label"
+label-use-name = false
+numbering = "absolute"
+app-icons-show = false
+active-indicator = "background"
+active-color = "accent"
+occupied-color = "fg-muted"
+empty-color = "fg-subtle"
+
+[modules.hyprland-workspaces.workspace-map]
+1 = { icon = "ld-globe-symbolic", color = "blue" }
+2 = { icon = "ld-terminal-symbolic", color = "green" }
+5 = { icon = "ld-music-symbolic", color = "accent" }
+
+[modules.window-title]
+format = "{{ title }}"
+label-max-length = 80
+
+[modules.clock]
+format = "%a %H:%M"
+
+[modules.media]
+format = "{{ title }} - {{ artist }}"
+label-max-length = 45
+
+[modules.network]
+label-max-length = 18
+
+[modules.volume]
+format = "{{ percent }}%"
+middle-click = "wayle audio output-mute"
+
+[modules.microphone]
+middle-click = "wayle audio input-mute"
+
+[modules.cpu]
+format = "CPU {{ percent }}%"
+
+[modules.ram]
+format = "RAM {{ percent }}%"
+
+[modules.notifications]
+right-click = "wayle notify dnd"
+
+[modules.idle-inhibit]
+left-click = "wayle idle toggle --indefinite"
+right-click = "wayle idle toggle"

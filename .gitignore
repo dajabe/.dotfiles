@@ -2,3 +2,8 @@ lazy-lock.json
 tmux/plugins
 fish/fish_variables
 .DS_Store
+wayle/runtime.toml
+wayle/schema.json
+wayle/tombi.toml
+wayle/themes/schema.json
+wayle/themes/tombi.toml

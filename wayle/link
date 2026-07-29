@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+WAYLE_CONF="$HOME/.config/wayle"
+rm -rf "$WAYLE_CONF"
+ln -s "$(pwd)" "$WAYLE_CONF"
