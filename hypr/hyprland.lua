@@ -3,6 +3,7 @@ require("config.autostart")
 require("config.appearance")
 require("config.input")
 require("config.workspaces")
+require("config.monitor_events")
 require("config.keybindings")
 
 -- local v = require("config.vars")

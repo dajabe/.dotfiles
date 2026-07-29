@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Hot-plugging can emit several events in quick succession. Keep one delayed
+# reconciliation and let it inspect the final monitor state.
+lock_dir="${XDG_RUNTIME_DIR:-/tmp}"
+exec 9>"${lock_dir}/hypr-route-workspaces.lock"
+flock -n 9 || exit 0
+sleep 0.3
+
+monitors_json="$(hyprctl monitors -j)"
+mapfile -t monitors < <(
+    jq -r '.[] | [.x, .name] | @tsv' <<<"${monitors_json}" \
+        | sort -n -k1,1 \
+        | cut -f2-
+)
+
+(( ${#monitors[@]} > 0 )) || exit 0
+
+# Only move workspaces that currently exist. workspace.created will run this
+# script again when a numbered workspace is first opened.
+mapfile -t workspaces < <(
+    hyprctl workspaces -j \
+        | jq -r '.[] | select(.id > 0) | .id' \
+        | sort -n
+)
+
+(( ${#workspaces[@]} > 0 )) || exit 0
+
+if (( ${#monitors[@]} == 1 )); then
+    left_monitor="${monitors[0]}"
+    right_monitor="${monitors[0]}"
+elif printf '%s\n' "${monitors[@]}" | grep -Fxq "DP-2" \
+    && printf '%s\n' "${monitors[@]}" | grep -Fxq "HDMI-A-1"; then
+    # Preserve the established desktop layout regardless of reported position.
+    left_monitor="DP-2"
+    right_monitor="HDMI-A-1"
+else
+    # Generic dual-monitor fallback: use the two leftmost outputs.
+    left_monitor="${monitors[0]}"
+    right_monitor="${monitors[1]}"
+fi
+
+commands=()
+for workspace in "${workspaces[@]}"; do
+    target="${right_monitor}"
+    if (( workspace <= 4 )); then
+        target="${left_monitor}"
+    fi
+
+    commands+=("dispatch moveworkspacetomonitor ${workspace} ${target}")
+done
+
+# A batch avoids exposing a partially-routed layout between commands.
+if (( ${#commands[@]} > 0 )); then
+    batch="$(IFS=';'; echo "${commands[*]}")"
+    hyprctl --quiet --batch "${batch}"
+fi
