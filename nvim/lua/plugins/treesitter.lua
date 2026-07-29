@@ -1,11 +1,45 @@
+local parsers = {
+  'bash',
+  'c',
+  'html',
+  'lua',
+  'markdown',
+  'markdown_inline',
+  'vim',
+  'vimdoc',
+  'ruby',
+  'embedded_template',
+  'dockerfile',
+  'javascript',
+  'typescript',
+  'python',
+}
+
+local filetypes = {
+  'bash',
+  'c',
+  'dockerfile',
+  'eruby',
+  'html',
+  'javascript',
+  'javascriptreact',
+  'lua',
+  'markdown',
+  'python',
+  'ruby',
+  'typescript',
+  'typescriptreact',
+  'vim',
+  'vimdoc',
+}
+
 return {
   {
     'nvim-treesitter/nvim-treesitter',
+    branch = 'main',
     lazy = false, -- Treesitter should not be lazy loaded
+    cond = vim.fn.executable 'tree-sitter' == 1,
     build = ':TSUpdate',
-    dependencies = {
-      'RRethy/nvim-treesitter-endwise',
-    },
     config = function()
       local query = require 'vim.treesitter.query'
 
@@ -39,47 +73,21 @@ return {
           or injection_alias
       end, { force = true })
 
-      ---@diagnostic disable-next-line: missing-fields
-      require('nvim-treesitter.configs').setup {
-        ensure_installed = {
-          'bash',
-          'c',
-          'html',
-          'lua',
-          'markdown',
-          'markdown_inline',
-          'vim',
-          'vimdoc',
-          'ruby',
-          'embedded_template',
-          'dockerfile',
-          'javascript',
-          'typescript',
-          'python',
-        },
-        auto_install = true,
-        highlight = {
-          enable = true,
-          -- Disable vim syntax highlighting to prevent conflicts
-          additional_vim_regex_highlighting = false,
-        },
-        indent = {
-          enable = true,
-          disable = { 'yaml' }, -- YAML has better indentation with Vim's built-in engine
-        },
-        endwise = {
-          enable = true,
-        },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = '<CR>',
-            node_incremental = '<CR>',
-            scope_incremental = '<S-CR>',
-            node_decremental = '<BS>',
-          },
-        },
-      }
+      local treesitter = require 'nvim-treesitter'
+      treesitter.setup { install_dir = vim.fn.stdpath('data') .. '/site' }
+      treesitter.install(parsers):wait(300000)
+
+      vim.api.nvim_create_autocmd('FileType', {
+        group = vim.api.nvim_create_augroup('dajabe-treesitter', { clear = true }),
+        pattern = filetypes,
+        callback = function(event)
+          pcall(vim.treesitter.start, event.buf)
+
+          if vim.bo[event.buf].filetype ~= 'yaml' then
+            vim.bo[event.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          end
+        end,
+      })
     end,
   },
 }

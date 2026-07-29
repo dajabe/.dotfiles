@@ -19,9 +19,11 @@ local mason_servers = {
       },
     },
   },
-
-  csharp_ls = utils.create_server_config {},
 }
+
+if vim.fn.executable 'dotnet' == 1 then
+  mason_servers.csharp_ls = utils.create_server_config {}
+end
 
 function M.setup()
   require('mason').setup()
