@@ -1,5 +1,11 @@
 local v = require("config.vars")
 
+ hl.config({
+     binds = {
+         hide_special_on_workspace_change = true,
+     },
+ })
+
 -- DP-2: left / primary monitor
 hl.workspace_rule({
     workspace = "1",
@@ -40,3 +46,8 @@ for workspace = 6, 9 do
         monitor = "HDMI-A-1",
     })
 end
+
+hl.workspace_rule({
+    workspace = "special:qalculate",
+    on_created_empty = "qalculate-gtk",
+})

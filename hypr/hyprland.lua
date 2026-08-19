@@ -36,6 +36,19 @@ hl.window_rule({
 })
 
 hl.window_rule({
+    name = "qalculate-scratchpad",
+
+    match = {
+        class = "qalculate-gtk",
+    },
+
+    workspace = "special:qalculate silent",
+    float = true,
+    size = "440 920",
+    move = "monitor_w-460 40",
+})
+
+hl.window_rule({
     name = "fix-xwayland-drags",
 
     match = {

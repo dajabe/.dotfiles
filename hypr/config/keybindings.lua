@@ -1,4 +1,5 @@
 local v = require("config.vars")
+local u = require("config.utils")
 local mainMod = v.mainMod
 
 -- Applications and window management
@@ -29,17 +30,17 @@ for workspace = 1, 10 do
     local key = workspace % 10
 
     hl.bind(
-        mainMod .. " + " .. key,
-        hl.dsp.focus({
-            workspace = workspace,
-        })
+      mainMod .. " + " .. key,
+      hl.dsp.focus({
+          workspace = workspace,
+      })
     )
 
     hl.bind(
-        mainMod .. " + SHIFT + " .. key,
-        hl.dsp.window.move({
-            workspace = workspace,
-        })
+      mainMod .. " + SHIFT + " .. key,
+      hl.dsp.window.move({
+          workspace = workspace,
+      })
     )
 end
 
@@ -54,6 +55,12 @@ hl.bind(
     hl.dsp.window.move({
         workspace = "special:magic",
     })
+)
+
+-- Calculator scratchpad
+hl.bind(
+    mainMod .. " + A",
+    hl.dsp.workspace.toggle_special("qalculate")
 )
 
 -- Scroll through existing workspaces

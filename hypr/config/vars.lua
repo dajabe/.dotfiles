@@ -4,5 +4,5 @@ return {
   terminal = "ghostty",
   browser = "firefox",
   fileManager = "thunar",
-  menu = "rofi -show drun",
+  menu = "hyprlauncher",
 }

@@ -11,12 +11,11 @@ font-mono = "JetBrains Mono"
 location = "top"
 exclusive = true
 layer = "top"
-# scale = 0.85
 scale = 1
 padding = 0
 padding-ends = 0
 module-gap = 0.5
-bg = "bg-surface"
+bg = "transparent"
 rounding = "none"
 button-rounding = "none"
 button-variant = "block-prefix"
@@ -29,24 +28,26 @@ button-icon-padding = 0.5
 button-label-size = 0.9
 button-label-padding = 0.5
 
-# One layout for all monitors. hyprland-workspaces is monitor-specific by default,
-# so each monitor shows and click-switches only its own workspaces.
 [[bar.layout]]
 monitor = "*"
-left = ["hyprland-workspaces"]
-center = ["clock", "media"]
-right = [
-  # "media",
-  { name = "status", modules = [
-    # "idle-inhibit",
-    "network",
-    "microphone",
-    "volume",
-    # "cpu",
-    # "ram",
-    "clock",
-    "systray",
-  ] },
+show = true
+center = ["hyprland-workspaces"]
+
+[[bar.layout.left]]
+name = ""
+modules = [
+  "clock",
+  "media",
+]
+
+[[bar.layout.right]]
+name = "status"
+modules = [
+  "network",
+  "microphone",
+  "volume",
+  "clock",
+  "systray",
 ]
 
 [styling]
@@ -60,8 +61,8 @@ matugen-light = false
 min-workspace-count = 5
 monitor-specific = true
 show-special = true
-display-mode = "label"
-label-use-name = false
+display-mode = "icon"
+label-use-name = true
 numbering = "absolute"
 app-icons-show = false
 active-indicator = "background"
@@ -69,10 +70,20 @@ active-color = "accent"
 occupied-color = "fg-muted"
 empty-color = "fg-subtle"
 
-[modules.hyprland-workspaces.workspace-map]
-1 = { icon = "ld-globe-symbolic", color = "blue" }
-2 = { icon = "ld-terminal-symbolic", color = "green" }
-5 = { icon = "ld-music-symbolic", color = "accent" }
+[modules.hyprland-workspaces.workspace-map.-98]
+icon = "ld-hash-symbolic"
+
+[modules.hyprland-workspaces.workspace-map.1]
+icon = "ld-globe-symbolic"
+color = "blue"
+
+[modules.hyprland-workspaces.workspace-map.2]
+icon = "ld-terminal-symbolic"
+color = "green"
+
+[modules.hyprland-workspaces.workspace-map.5]
+icon = "ld-music-symbolic"
+color = "accent"
 
 [modules.window-title]
 format = "{{ title }}"
@@ -103,7 +114,12 @@ format = "RAM {{ percent }}%"
 
 [modules.notifications]
 right-click = "wayle notify dnd"
+popup-position = "bottom-center"
+popup-monitor = "primary"
 
 [modules.idle-inhibit]
 left-click = "wayle idle toggle --indefinite"
 right-click = "wayle idle toggle"
+
+[wallpaper]
+engine-enabled = false
