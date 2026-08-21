@@ -25,6 +25,14 @@ hl.bind(
     )
 )
 
+-- Screenshots
+hl.bind(
+  "Print",
+  hl.dsp.exec_cmd(
+    'grim -g "$(slurp -d)" - | satty -f - --copy-command wl-copy -o "~/Pictures/Screenshots/%Y%m%d_%H%M%S.png"'
+  )
+)
+
 --- Workspace
 for workspace = 1, 10 do
     local key = workspace % 10
