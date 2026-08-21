@@ -83,7 +83,23 @@ format = "{{ title }}"
 label-max-length = 80
 
 [modules.clock]
-format = "%a %H:%M"
+format = "%Y-%m-%d | %a | %H:%M"
+icon-name = "tb-calendar-time-symbolic"
+border-show = false
+border-color = "border-accent"
+icon-show = true
+icon-color = "accent"
+icon-bg-color = "bg-surface-elevated"
+label-show = true
+label-color = "accent"
+label-max-length = 0
+button-bg-color = "bg-surface-elevated"
+left-click = "dropdown:calendar"
+right-click = "dropdown:weather"
+middle-click = ""
+scroll-up = ""
+scroll-down = ""
+dropdown-show-seconds = false
 
 [modules.media]
 format = "{{ title }} - {{ artist }}"
