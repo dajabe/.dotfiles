@@ -45,9 +45,9 @@ function tec
   # Launch tmux session
   tmux new-session -x- -y- -dc $HOME/.config -s $session_name -n 'home/config'
   if test -n "$repo_migration_notice"
-    tmux send-keys -t $session_name:'home/config' "echo '$repo_migration_notice'" C-m
+    tmux send-keys -t $session_name:'cfg' "echo '$repo_migration_notice'" C-m
   end
-  tmux send-keys -t $session_name:'home/config' $preview_command C-m
+  tmux send-keys -t $session_name:'cfg' $preview_command C-m
 
   # Add new window for dotfiles if the directory exists
   if test -d $dots_dir
@@ -57,8 +57,8 @@ function tec
 
   # Add new window for ds-dots if the directory exists
   if test -d $work_dots_dir
-    tmux new-window -t $session_name -c $work_dots_dir -n 'work-dots'
-    tmux send-keys -t $session_name:'work-dots' $preview_command C-m
+    tmux new-window -t $session_name -c $work_dots_dir -n 'wk-dots'
+    tmux send-keys -t $session_name:'wk-dots' $preview_command C-m
   end
 
   # Add a new window for espanso config if the directory exists and espanso is installed
@@ -71,7 +71,7 @@ function tec
   if tmux list-windows -t $session_name | grep -q 'dots'
     tmux select-window -t $session_name:'dots'
   else
-    tmux select-window -t $session_name:'home/config'
+    tmux select-window -t $session_name:'cfg'
   end
 
   tmux $attach_switch -t $session_name
