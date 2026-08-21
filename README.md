@@ -15,6 +15,9 @@ application and replace it with a link to the directory in this repository.
 I use both Mac and Linux platforms and where it makes sense the config will be further
 split into `MacOS` and `Nix` folders underneath or something similar.
 
+## Assumption
+That uwsm is being used to launch graphical stuff
+
 ## Repository location
 
 These configs are moving towards storing personal repositories under `~/dev/dajabe`.
