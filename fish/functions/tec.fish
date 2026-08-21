@@ -13,10 +13,16 @@ function tec
     return
   end
 
+  set repo_migration_notice ""
   if set -q REPOSITORY_DIR
     set repo_dir "$REPOSITORY_DIR"
-  else
+  else if test -d "$HOME/dev/dajabe/.dotfiles"; or test -d "$HOME/dev/dajabe/.ds-dots"
+    set repo_dir "$HOME/dev/dajabe"
+  else if test -d "$HOME/dev/.dotfiles"; or test -d "$HOME/dev/.ds-dots"
     set repo_dir "$HOME/dev"
+    set repo_migration_notice "Config repositories are moving to ~/dev/dajabe. Please move ~/dev/.dotfiles and ~/dev/.ds-dots to ~/dev/dajabe or set REPOSITORY_DIR."
+  else
+    set repo_dir "$HOME/dev/dajabe"
   end
 
   set work_dots_dir "$repo_dir/.ds-dots"
@@ -38,6 +44,9 @@ function tec
 
   # Launch tmux session
   tmux new-session -x- -y- -dc $HOME/.config -s $session_name -n 'home/config'
+  if test -n "$repo_migration_notice"
+    tmux send-keys -t $session_name:'home/config' "echo '$repo_migration_notice'" C-m
+  end
   tmux send-keys -t $session_name:'home/config' $preview_command C-m
 
   # Add new window for dotfiles if the directory exists
