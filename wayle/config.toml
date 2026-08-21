@@ -31,13 +31,15 @@ button-label-padding = 0.5
 [[bar.layout]]
 monitor = "*"
 show = true
-left = ["clock", "media"]
+left = [
+  "clock",
+]
 center = ["hyprland-workspaces"]
 right = [
+  "battery",
   "network",
   "microphone",
   "volume",
-  "clock",
   "systray",
 ]
 
