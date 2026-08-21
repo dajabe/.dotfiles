@@ -36,7 +36,7 @@ left = [
 ]
 center = ["hyprland-workspaces"]
 right = [
-  "battery",
+  "custom-battery",
   "network",
   "microphone",
   "volume",
@@ -91,6 +91,33 @@ label-max-length = 45
 
 [modules.network]
 label-max-length = 18
+
+[[modules.custom]]
+id = "battery"
+command = '''
+dev=$(upower -e | grep -m1 '/battery_') || exit 0
+[ -n "$dev" ] || exit 0
+info=$(upower -i "$dev")
+percent=$(printf '%s\n' "$info" | awk '/percentage:/ { gsub("%", "", $2); print int($2); exit }')
+state=$(printf '%s\n' "$info" | awk '/state:/ { print $2; exit }')
+[ -n "$percent" ] || exit 0
+printf '{"text":"%s%%","percentage":%s,"alt":"%s"}\n' "$percent" "$percent" "$state"
+'''
+hide-if-empty = true
+icon-names = [
+  "md-battery_android_0-symbolic",
+  "md-battery_android_frame_1-symbolic",
+  "md-battery_android_frame_2-symbolic",
+  "md-battery_android_frame_3-symbolic",
+  "md-battery_android_frame_4-symbolic",
+  "md-battery_android_frame_5-symbolic",
+  "md-battery_android_frame_6-symbolic",
+  "md-battery_android_frame_full-symbolic",
+]
+icon-map = { charging = "md-battery_android_frame_bolt-symbolic" }
+icon-bg-color = "yellow"
+label-color = "yellow"
+left-click = "dropdown:battery"
 
 [modules.volume]
 format = "{{ percent }}%"
