@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-TMUX_POWERLINE_CONF="$HOME/.config/tmux-powerline"
-rm -rf "$TMUX_POWERLINE_CONF"
-ln -s "$(pwd)" "$TMUX_POWERLINE_CONF"

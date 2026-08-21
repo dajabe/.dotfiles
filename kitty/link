@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+KITTY_CONF="$HOME/.config/kitty"
+rm -rf "$KITTY_CONF"
+ln -s "$(pwd)" "$KITTY_CONF"
