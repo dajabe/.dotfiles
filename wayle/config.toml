@@ -33,14 +33,20 @@ monitor = "*"
 show = true
 left = [
   "clock",
+  # "separator",
+  "window-title",
 ]
-center = ["hyprland-workspaces"]
+center = [
+  "hyprland-workspaces",
+]
 right = [
+  "systray",
   "custom-battery",
+  "bluetooth",
   "network",
   "microphone",
   "volume",
-  "systray",
+  "notifications",
 ]
 
 [styling]
@@ -53,7 +59,7 @@ matugen-light = false
 [modules.hyprland-workspaces]
 min-workspace-count = 5
 monitor-specific = true
-show-special = true
+show-special = false
 display-mode = "icon"
 label-use-name = true
 numbering = "absolute"
