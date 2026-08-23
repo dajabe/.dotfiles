@@ -32,6 +32,8 @@ button-label-padding = 0.5
 monitor = "*"
 show = true
 left = [
+  "power",
+  "idle-inhibit",
   "clock",
   # "separator",
   "window-title",
@@ -113,6 +115,10 @@ label-max-length = 45
 
 [modules.network]
 label-max-length = 18
+label-show = false
+
+[modules.bluetooth]
+label-show = false
 
 [[modules.custom]]
 id = "battery"
@@ -144,9 +150,11 @@ left-click = "dropdown:battery"
 [modules.volume]
 format = "{{ percent }}%"
 middle-click = "wayle audio output-mute"
+label-show = false
 
 [modules.microphone]
 middle-click = "wayle audio input-mute"
+label-show = false
 
 [modules.cpu]
 format = "CPU {{ percent }}%"
@@ -162,6 +170,7 @@ popup-monitor = "primary"
 [modules.idle-inhibit]
 left-click = "wayle idle toggle --indefinite"
 right-click = "wayle idle toggle"
+label-show = false
 
 [wallpaper]
 engine-enabled = false
