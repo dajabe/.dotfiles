@@ -16,6 +16,7 @@ hl.bind(mainMod .. " + V", hl.dsp.window.float({
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + SLASH", hl.dsp.layout("togglesplit"))
 
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd("pidof hyprlock || hyprlock"))
 hl.bind(
     mainMod .. " + M",
     hl.dsp.exec_cmd(

@@ -49,6 +49,17 @@ hl.window_rule({
 })
 
 hl.window_rule({
+    name = "keep-1password-unlock-focused",
+
+    match = {
+        class = "1Password",
+        title = "1Password",
+    },
+
+    stay_focused = true,
+})
+
+hl.window_rule({
     name = "fix-xwayland-drags",
 
     match = {
