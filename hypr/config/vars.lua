@@ -2,7 +2,7 @@
 return {
   mainMod = "SUPER",
   terminal = "kitty",
-  browser = "firefox",
+  browser = "zen-browser",
   fileManager = "thunar",
   menu = "hyprlauncher",
 }
