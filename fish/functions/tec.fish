@@ -43,7 +43,7 @@ function tec
   set preview_command 'lsd --tree --depth 1 --group-directories-first'
 
   # Launch tmux session
-  tmux new-session -x- -y- -dc $HOME/.config -s $session_name -n 'home/config'
+  tmux new-session -x- -y- -dc $HOME/.config -s $session_name -n 'cfg'
   if test -n "$repo_migration_notice"
     tmux send-keys -t $session_name:'cfg' "echo '$repo_migration_notice'" C-m
   end
