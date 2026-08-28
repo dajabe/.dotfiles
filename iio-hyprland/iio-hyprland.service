@@ -1,0 +1,12 @@
+[Unit]
+Description=Automatic screen rotation for Hyprland
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/iio-hyprland eDP-1
+Restart=on-failure
+RestartSec=2s
+
+[Install]
+WantedBy=graphical-session.target

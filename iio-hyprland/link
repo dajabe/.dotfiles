@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if ! command -v iio-hyprland >/dev/null 2>&1; then
+  echo "iio-hyprland is not installed" >&2
+  exit 1
+fi
+
+SYSTEMD_USER_DIR="$HOME/.config/systemd/user"
+mkdir -p "$SYSTEMD_USER_DIR"
+ln -sfn "$(pwd)/iio-hyprland.service" "$SYSTEMD_USER_DIR/iio-hyprland.service"
+
+systemctl --user daemon-reload
+systemctl --user enable --now iio-hyprland.service
