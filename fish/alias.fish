@@ -31,7 +31,7 @@ alias vimdiff='nvim -d'
 alias scr=scratchy
 
 # Worktree scripts
-alias wtn=setup_worktree
+alias wtn='setup_worktree --with-docs'
 alias wtr=remove_worktree
 
 # ls
