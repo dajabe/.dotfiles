@@ -4,7 +4,6 @@ return {
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
-    'mihyaeru21/nvim-lspconfig-bundler',
     { 'j-hui/fidget.nvim', opts = {} },
   },
   config = function()
@@ -47,7 +46,6 @@ return {
       end,
     })
 
-    require('lspconfig-bundler').setup()
     require('plugins.lsp.mason').setup() -- autoload servers with mason
     utils.load_servers() -- load manually defined servers
   end,
