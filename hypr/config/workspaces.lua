@@ -62,6 +62,12 @@ hl.workspace_rule({
     default = true,
 })
 
+hl.workspace_rule({
+    workspace = "10",
+    default_name = "games",
+    monitor = secondary_monitor,
+})
+
 for workspace = 6, 9 do
     hl.workspace_rule({
         workspace = tostring(workspace),

@@ -35,6 +35,13 @@ hl.bind(
 )
 
 --- Workspace
+hl.bind(
+    mainMod .. " + G",
+    hl.dsp.focus({
+        workspace = 10,
+    })
+)
+
 for workspace = 1, 10 do
     local key = workspace % 10
 

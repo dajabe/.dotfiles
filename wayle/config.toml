@@ -42,6 +42,7 @@ center = [
   "hyprland-workspaces",
 ]
 right = [
+  "media",
   "systray",
   "custom-battery",
   "bluetooth",
@@ -111,6 +112,7 @@ dropdown-show-seconds = false
 
 [modules.media]
 format = "{{ title }} - {{ artist }}"
+label-show = false
 label-max-length = 45
 
 [modules.network]
@@ -149,7 +151,8 @@ left-click = "dropdown:battery"
 
 [modules.volume]
 format = "{{ percent }}%"
-middle-click = "wayle audio output-mute"
+middle-click = "pactl-switch-sink-port"
+right-click = "pavucontrol"
 label-show = false
 
 [modules.microphone]

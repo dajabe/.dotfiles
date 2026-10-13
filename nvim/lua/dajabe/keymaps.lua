@@ -1,12 +1,6 @@
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
--- Set shortcut to launch Oil a netrw replacement
-vim.keymap.set('n', '-', '<CMD>Oil --float<CR>', { desc = 'Open oil file browser floating' })
-vim.keymap.set('n', '<leader>oo', '<CMD>Oil<CR>', { desc = 'Open oil file browser in new window' })
-vim.keymap.set('n', '<leader>ov', '<CMD>vertical Oil<CR>', { desc = 'Open oil file browser in a vertical pane' })
-vim.keymap.set('n', '<leader>oh', '<CMD>belowright Oil<CR>', { desc = 'Open oil file browser in a horizontal pane' })
-
 -- Paste contents of clipboard over current selection
 vim.keymap.set('x', '<leader>p', [["_dp]])
 vim.keymap.set('x', '<leader>P', [["_dP]])

@@ -14,7 +14,7 @@ require("config.keybindings")
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
 
-hl.env("QT_QPA_PLATFORMTHEME", "qt5ct")
+hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
 
 -- NVIDIA proprietary driver
 hl.env("LIBVA_DRIVER_NAME", "nvidia")
@@ -49,6 +49,17 @@ hl.window_rule({
 })
 
 hl.window_rule({
+    name = "cs2-games-workspace",
+
+    match = {
+        class = "steam",
+        title = "Counter-Strike 2",
+    },
+
+    workspace = "10 silent",
+})
+
+hl.window_rule({
     name = "keep-1password-unlock-focused",
 
     match = {
@@ -57,6 +68,27 @@ hl.window_rule({
     },
 
     stay_focused = true,
+})
+
+hl.window_rule({
+  name = "float-audio-control",
+  
+  match = {
+    class = "org.pulseaudio.pavucontrol"
+  },
+
+  size = "600 920",
+  float = true
+})
+
+hl.window_rule({
+    name = "group-libreoffice-windows",
+
+    match = {
+        class = "^(libreoffice.*|soffice)$",
+    },
+
+    group = "set always",
 })
 
 hl.window_rule({
